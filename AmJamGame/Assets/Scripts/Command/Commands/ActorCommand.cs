@@ -12,13 +12,18 @@ public class ActorCommand : BaseCommand
         FAILED
     }
 
-    public EExecutionProgress ExecutionProgress;
-    public Actor actor;
+    public EExecutionProgress ExecutionProgress { get; protected set; }
+    public string ExecutionResult { get; protected set; }
 
-    public ActorCommand(string name, Actor actor)
+
+    public Actor actor;
+    public int lineNumber;
+
+    public ActorCommand(string name, Actor actor, int lineNumber)
             : base(name, "ActorsContext")
     {
         this.actor = actor;
+        this.lineNumber = lineNumber;
     }
 
     public override void Execute()
