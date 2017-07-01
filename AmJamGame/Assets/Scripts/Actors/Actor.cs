@@ -1,0 +1,118 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class Actor : MonoBehaviour
+{
+    [TagSelector]
+    public string[] blocks = new string[] { };
+
+    [TagSelector]
+    public string[] hazards = new string[] { };
+
+    [TagSelector]
+    public string[] interactables = new string[] { };
+
+    public int movementStep = 1;
+
+    protected int tileSize = 1;
+
+    private void Awake()
+    {
+        GameManager.Instance.RegisterActor(this);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.UregisterActor(this);
+    }
+
+    public virtual string MakeInteraction()
+    {
+        var interactable = GameManager.Instance.GetInteractableAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y);
+
+        if(interactable == null)
+            return "No actor to interact!";
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            if (interactable.tag == interactables[i])
+            {
+                interactable.Interact(this);
+                return string.Empty;
+            }                
+        }
+
+        return "Cannot interact with: " + interactable.tag;
+    }
+
+    public virtual string PossessOverlappedActor()
+    {
+        var actor = GameManager.Instance.GetActorAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y, this);
+
+        if(actor == null)
+        {
+            return "No actor to possess!";
+        }
+
+        GameManager.Instance.UpdatedPossessedActor(actor);
+
+        return string.Empty;
+    }
+
+    public virtual string Move(directionType direction)
+    {
+        var newPosition = transform.localPosition;
+
+        switch (direction)
+        {
+            case directionType.up:
+                newPosition.y += tileSize * movementStep;
+                break;
+            case directionType.down:
+                newPosition.y -= tileSize * movementStep;
+                break;
+            case directionType.left:
+                newPosition.x -= tileSize * movementStep;
+                break;
+            case directionType.right:
+                newPosition.x += tileSize * movementStep;
+                break;
+        }
+
+        string result = ValidatePosition((int)newPosition.x, (int)newPosition.y);
+
+        if (string.IsNullOrEmpty(result))
+        {
+            transform.localPosition = newPosition;
+        }
+
+        return result;
+    }
+
+    public virtual void Kill()
+    {
+        GameManager.Instance.UregisterActor(this);
+        GameManager.Instance.BackHistory();
+        gameObject.SetActive(false);
+    }
+
+    public virtual string ValidatePosition(int x, int y)
+    {
+        var tile = GameManager.Instance.GetTileAtPosition(x, y);
+
+        for(int i = 0; i < hazards.Length; i++)
+        {
+            if (tile.tag == hazards[i])
+                return "Killed by: " + tile.tileName;
+        }
+
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            if (tile.tag == blocks[i])
+                return "Blocked by: " + tile.tileName;
+        }
+
+        return string.Empty;
+    }
+}
