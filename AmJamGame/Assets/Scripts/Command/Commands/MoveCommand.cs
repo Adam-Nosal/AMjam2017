@@ -18,7 +18,13 @@ public class MoveCommand : ActorCommand
     {
         base.Execute();
 
-        for(int i = 0; i < iterations; i++)
+        coroutine = GameManager.Instance.StartCoroutine(ExecuteDelayed());
+        
+    }
+
+    private IEnumerator ExecuteDelayed()
+    {
+        for (int i = 0; i < iterations; i++)
         {
             ExecutionResult = actor.Move(direction);
 
@@ -26,11 +32,14 @@ public class MoveCommand : ActorCommand
             {
                 ExecutionProgress = EExecutionProgress.FAILED;
                 Abort();
-                return;
+                yield break;
             }
+
+            yield return new WaitForSeconds(1f);
         }
         ExecutionProgress = EExecutionProgress.SUCCESS;
         Abort();
-        
     }
+
+
 }

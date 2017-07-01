@@ -32,7 +32,7 @@ public class KeyActor : Actor
 
         string result = ValidatePosition((int)newPosition.x, (int)newPosition.y);
 
-        if (string.IsNullOrEmpty(result))
+        if (!result.Contains("Blocked"))
         {
             transform.localPosition = newPosition;
         }

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: f43bc528068851e41b9bb15d1acd4995
+timeCreated: 1498902250
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PxPlus IBM MDA
+  fontNames:
+  - PxPlus IBM MDA
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

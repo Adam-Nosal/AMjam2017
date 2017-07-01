@@ -21,11 +21,12 @@ public class TilesetEditor : Editor
         TileMap = (Texture)EditorGUILayout.ObjectField("TileMap", TileMap, typeof(Texture2D), false);
         TileSet.PrefabsPath = prefabsPath;
         TileSet.TileMap = TileMap;
-
+#if UNITY_EDITOR
         if (GUILayout.Button("GeneratePrefabs"))
         {
             TileSet.GenerateTilePrefabs();
         }
+#endif
 
     }
 }

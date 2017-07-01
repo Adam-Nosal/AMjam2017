@@ -11,6 +11,10 @@ public class DoorInteractable : InteractableObject
     [SerializeField]
     private bool isOpen = false;
 
+    private const string closedTag = "DoorClosed";
+    private const string openTag = "DoorOpen";
+
+
     public void Start()
     {
         SetState(isOpen);
@@ -41,6 +45,7 @@ public class DoorInteractable : InteractableObject
     {
         isOpen = !isOpen;
         SetState(isOpen);
+        this.tag = isOpen ? openTag : closedTag;
     }
 
     private void SetState(bool origin)

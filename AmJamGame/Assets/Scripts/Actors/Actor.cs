@@ -83,7 +83,7 @@ public abstract class Actor : MonoBehaviour
 
         string result = ValidatePosition((int)newPosition.x, (int)newPosition.y);
 
-        if (string.IsNullOrEmpty(result))
+        if (!result.Contains("Blocked"))
         {
             transform.localPosition = newPosition;
         }
@@ -104,7 +104,20 @@ public abstract class Actor : MonoBehaviour
     {
         var tile = GameManager.Instance.GetTileAtPosition(x, y);
 
-        for(int i = 0; i < hazards.Length; i++)
+        if(tile == null)
+            return "Killed by void";
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            if (interactables[i] == "Actor")
+            {
+                var actor = GameManager.Instance.GetActorAtPosition(x, y, this);
+                if (actor != null)
+                    return string.Empty;
+            }
+        }
+
+        for (int i = 0; i < hazards.Length; i++)
         {
             if (tile.tag == hazards[i])
                 return "Killed by: " + tile.tileName;

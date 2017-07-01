@@ -27,7 +27,8 @@ public abstract class BaseCommand : ICommand
 
     public virtual void Abort()
     {
-        GameManager.Instance.StartCoroutine(Aborting());
+        OnExecutionComplete(this);
+        //GameManager.Instance.StartCoroutine(Aborting());
     }
 
     public bool IsInContext(string context)
