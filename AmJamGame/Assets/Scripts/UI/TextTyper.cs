@@ -14,6 +14,7 @@ public class TextTyper : MonoBehaviour
     public bool inverted;
 
     private UnityEngine.UI.Text textField;
+    public UnityEngine.UI.InputField textFieldInput;
     private bool isCorutineRunning = false;
 
     public List<LineToAdd> lines = new List<LineToAdd>();
@@ -42,15 +43,29 @@ public class TextTyper : MonoBehaviour
     {
         var currentLine = lines[lines.Count-1];
         var baseText = textField.text;
+
+        if (textFieldInput != null)
+            baseText = textFieldInput.text;
+
         var currentIndex = 0;
 
         isCorutineRunning = true;
         while (currentIndex < currentLine.text.Length)
         {
-            if (!inverted)
-                textField.text = baseText + string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1));
+            if(textFieldInput != null)
+            {
+                if (!inverted)
+                    textFieldInput.text = baseText + string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1));
+                else
+                    textFieldInput.text = string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1)) + baseText;
+            }
             else
-                textField.text = string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1)) + baseText;
+            {
+                if (!inverted)
+                    textField.text = baseText + string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1));
+                else
+                    textField.text = string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1)) + baseText;
+            }
 
             currentIndex++;
 

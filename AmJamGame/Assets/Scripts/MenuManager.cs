@@ -22,7 +22,7 @@ public class MenuManager : Singleton<MenuManager>
     private IEnumerator Start()
     {
         StartCoroutine(CustomUpdate());
-
+        WorldManager.Instance.soundManager.PlayAmbient();
         yield return new WaitForSeconds(3f);
         
     }

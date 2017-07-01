@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     {
         GetPossessedActor().SetPossessed(true);
         StartCoroutine(CustomUpdate());
-
+      //  WorldManager.Instance.soundManager.PlayAmbient();
         yield return new WaitForSeconds(3f);
 
         /*var l = new List<ActorCommand>();
