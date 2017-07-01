@@ -74,7 +74,7 @@ public class MenuManager : Singleton<MenuManager>
 
     private string Credits = 
         "GAME DESIGN:" + Environment.NewLine +
-        " <color=blue>Michał Sapiński</color>" + Environment.NewLine + Environment.NewLine +
+        " <color=#29adff>Michał Sapiński</color>" + Environment.NewLine + Environment.NewLine +
         "PROGRAMMING:" + Environment.NewLine +
         " <color=#FF54DCFF>Agata Chmiel " + Environment.NewLine +
         " Łukasz Górny " + Environment.NewLine +
