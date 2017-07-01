@@ -33,6 +33,7 @@ public class Console : Singleton<Console> {
       //  EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
      //   ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
 
+
         Debug.Log(ConsoleInput.text);
         CurrentRunLines.Add(ConsoleInput.text);
         ConsoleOutputText.text += "\n" + ConsoleInput.text;

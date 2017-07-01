@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-
 	// Use this for initialization
-	void Start () {
-		
+	void Awake ()
+    {
+        GameManager.Instance.RegisterInteractable(this);		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public virtual void Interact(Actor actor)
+    {
+
+    }
 }

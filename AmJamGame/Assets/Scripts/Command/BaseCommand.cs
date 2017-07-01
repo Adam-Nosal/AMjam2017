@@ -27,11 +27,17 @@ public abstract class BaseCommand : ICommand
 
     public virtual void Abort()
     {
-        OnExecutionComplete(this);
+        GameManager.Instance.StartCoroutine(Aborting());
     }
 
     public bool IsInContext(string context)
     {
         return Contexts.Contains(context);
+    }
+
+    private IEnumerator Aborting()
+    {
+        yield return new WaitForSeconds(1f);
+        OnExecutionComplete(this);
     }
 }

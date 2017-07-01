@@ -5,13 +5,38 @@ using UnityEngine;
 
 public class KeyActor : Actor
 {
-    public override string MakeInteraction()
+    public override string Move(directionType direction)
     {
-        throw new NotImplementedException();
-    }
+        var interactable = GameManager.Instance.GetInteractableAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y);
 
-    public override string PossessOverlappedActor()
-    {
-        throw new NotImplementedException();
+        if (interactable != null && interactable.tag == "DoorClosed")
+            return string.Empty;
+
+        var newPosition = transform.localPosition;
+
+        switch (direction)
+        {
+            case directionType.up:
+                newPosition.y += tileSize * movementStep;
+                break;
+            case directionType.down:
+                newPosition.y -= tileSize * movementStep;
+                break;
+            case directionType.left:
+                newPosition.x -= tileSize * movementStep;
+                break;
+            case directionType.right:
+                newPosition.x += tileSize * movementStep;
+                break;
+        }
+
+        string result = ValidatePosition((int)newPosition.x, (int)newPosition.y);
+
+        if (string.IsNullOrEmpty(result))
+        {
+            transform.localPosition = newPosition;
+        }
+
+        return result;
     }
 }

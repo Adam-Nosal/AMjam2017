@@ -5,13 +5,4 @@ using UnityEngine;
 
 public class FrogActor : Actor
 {
-    public override string MakeInteraction()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override string PossessOverlappedActor()
-    {
-        throw new NotImplementedException();
-    }
 }
