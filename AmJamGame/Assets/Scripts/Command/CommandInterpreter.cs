@@ -80,7 +80,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
                         //check number
                         int iterations;
-                        int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (bracket + 1)), out iterations);
+                        int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (comma + 1)), out iterations);
                         if (iterations == 0)
                             return;    
 
