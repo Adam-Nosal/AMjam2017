@@ -26,9 +26,11 @@ public class Console : MonoBehaviour {
     {
         Debug.Log(ConsoleInput.text);
         CommandInterpreter.Instance.usedCommandsList.Add(ConsoleInput.text);
+
+        CommandInterpreter.Instance.InterpretCommands();
        // bool isRecognisible = CommandInterpreter.Instance.InterpretCommand(ConsoleInput.text);
 
-     ///   if()
+        ///   if()
     }
 
 }

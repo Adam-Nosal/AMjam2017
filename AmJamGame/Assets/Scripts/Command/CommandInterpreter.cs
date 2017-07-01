@@ -20,7 +20,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
         };
     }
 
-    public List<string> usedCommandsList;
+    public List<string> usedCommandsList = new List<string>();
 
     // Update is called once per frame
     void Update()
@@ -28,7 +28,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
     }
 
-    public void InterpretCommand()
+    public void InterpretCommands()
     {
         List<ActorCommand> commands = new List<ActorCommand>();
 
@@ -49,15 +49,27 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
             {
                 case "move":
                     {
-                        string param1 = usedCommandsList[i].Substring(usedCommandsList[i].IndexOf('(')+1, usedCommandsList[i].IndexOf(','));
+                        int bracket = usedCommandsList[i].IndexOf('(');
+                        int comma = usedCommandsList[i].IndexOf(',');
+                        string param1 = usedCommandsList[i].Substring(bracket+1, comma - (bracket + 1));
+                        directionType dir;
                         //check direction
-                        directionType dir = Enum.Parse(typeof(directionType), param1);
-                       // if (Enum.TryParse(typeof(directionType), param1, out dir))
-                      //      MessageBox.Show("Defined");  // Defined for "New_Born, 1, 4 , 8, 12"
+                        try {
+                            dir = (directionType)Enum.Parse(typeof(directionType), param1);
+                        }
+                        catch(Exception e)
+                        {
+                            return;
+                        }
+
                         //check number
+                        int iterations;
+                        int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (bracket + 1)), out iterations);
+                        if (iterations == 0)
+                            return;    
 
                         //tmp
-                        MoveCommand move = new MoveCommand(null, 2, "f", 4);
+                        MoveCommand move = new MoveCommand(null, i, "f", iterations);
                         commands.Add(move);
                         break;
                     }
