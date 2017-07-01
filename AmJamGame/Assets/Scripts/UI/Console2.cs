@@ -126,9 +126,9 @@ public class Console2 : Singleton<Console2> {
         {
             if (sthChangedInInput)
                 CurrentRunLines.Add(new LineWithFeedback() { code = ln });
-            sthChangedInInput = false;
             CommandInterpreter.Instance.usedCommandsList.Add(ln);
         }
+        sthChangedInInput = false;
 
         CommandInterpreter.Instance.InterpretCommands();
         CommandInterpreter.Instance.usedCommandsList.Clear();
