@@ -100,7 +100,7 @@ public class GameManager : Singleton<GameManager>
         if (isCodeRunning)
             commandsManager.UpdateQueue();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(CustomUpdate());
     }
@@ -205,6 +205,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
+        GetPossessedActor().SetPossessed(false);
         isCodeRunning = false;
         commandsNum = 0;
 
@@ -228,5 +229,7 @@ public class GameManager : Singleton<GameManager>
             UnregisterInteractable(allInteractiables[i]);
             allInteractiables[i].ResetInteractiable();
         }
+        GetPossessedActor().SetPossessed(true);
+        camera2D.SetNewTarget(GetPossessedActor().gameObject);
     }
 }

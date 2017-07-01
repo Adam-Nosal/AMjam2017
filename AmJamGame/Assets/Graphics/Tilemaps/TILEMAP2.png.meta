@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e1cf46fd36dccd64ba071699ec202e80
-timeCreated: 1498910045
+timeCreated: 1498915394
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -260,9 +260,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
+        y: 41
         width: 20
-        height: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,9 +273,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 20
-        y: 40
+        y: 41
         width: 20
-        height: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,9 +298,9 @@ TextureImporter:
       name: TILEMAP2_15
       rect:
         serializedVersion: 2
-        x: 60
+        x: 61
         y: 41
-        width: 20
+        width: 18
         height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -376,9 +376,9 @@ TextureImporter:
       name: TILEMAP2_21
       rect:
         serializedVersion: 2
-        x: 60
+        x: 61
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
