@@ -14,50 +14,65 @@ public class Console2 : Singleton<Console2> {
     }
 
     public InputField ConsoleInput;
+    public Text DebugOutput;
 
     private List<LineWithFeedback> CurrentRunLines = new List<LineWithFeedback>();
     private int previousLinesCount = 0;
 
     // Use this for initialization
     void Start () {
+       
        // ConsoleInput.OnSubmit += InputEntered;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-       // Debug.Log(ConsoleInput.selectionFocusPosition);
-        int currentLine = 0;
-        int charsInLines = 0; 
-       for(int i=0;i< CurrentRunLines.Count; i++)
+
+       if(ConsoleInput.isFocused)
         {
-            charsInLines += (CurrentRunLines[i].code!=null?CurrentRunLines[i].code.Length:0) + (CurrentRunLines[i].feedback != null ? CurrentRunLines[i].feedback.Length : 0);
-            if (ConsoleInput.selectionFocusPosition<=charsInLines)
+            int index = CurrentRunLines.FindIndex(l => !string.IsNullOrEmpty(l.feedback));
+            if (index >= 0)
             {
-                currentLine = i;
-              //  Debug.Log("CURRENT LINE " + currentLine); 
-                break;
+                ConsoleInput.text = "";
+                CurrentRunLines[index].feedback = "";
+                for (int i = 0; i < CurrentRunLines.Count; i++)
+                    ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
             }
         }
 
-        if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
-        {
-            string[] lines = ConsoleInput.text.Split('\n');
-            // for (int i = 0; i < lines.Length; i++)
-            //  {
-            if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
-            {
-                lines[currentLine] = lines[currentLine].Remove(lines[currentLine].IndexOf(CurrentRunLines[currentLine].feedback), CurrentRunLines[currentLine].feedback.Length);
-                CurrentRunLines[currentLine].feedback = "";
-                
-                ConsoleInput.text = "";
-                for (int i = 0; i < CurrentRunLines.Count; i++)
-                    ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
-            }
-            //  }
-            // lines[i] = lines[i].Remove(lines[ConsoleInput.selectionFocusPosition].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
-            Debug.Log(ConsoleInput.selectionFocusPosition);
-        }
+       //// Debug.Log(ConsoleInput.selectionFocusPosition);
+       // int currentLine = 0;
+       // int charsInLines = 0; 
+       //for(int i=0;i< CurrentRunLines.Count; i++)
+       // {
+       //     charsInLines += (CurrentRunLines[i].code!=null?CurrentRunLines[i].code.Length:0) + (CurrentRunLines[i].feedback != null ? CurrentRunLines[i].feedback.Length : 0);
+       //     if (ConsoleInput.selectionFocusPosition<=charsInLines)
+       //     {
+       //         currentLine = i;
+       //       //  Debug.Log("CURRENT LINE " + currentLine); 
+       //         break;
+       //     }
+       // }
+
+        // if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
+        // {
+        //     string[] lines = ConsoleInput.text.Split('\n');
+        //     // for (int i = 0; i < lines.Length; i++)
+        //     //  {
+        //     if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
+        //     {
+        //         lines[currentLine] = lines[currentLine].Remove(lines[currentLine].IndexOf(CurrentRunLines[currentLine].feedback), CurrentRunLines[currentLine].feedback.Length);
+        //         CurrentRunLines[currentLine].feedback = "";
+
+        //         ConsoleInput.text = "";
+        //         for (int i = 0; i < CurrentRunLines.Count; i++)
+        //             ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
+        //     }
+        //     //  }
+        //     // lines[i] = lines[i].Remove(lines[ConsoleInput.selectionFocusPosition].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
+        //     Debug.Log(ConsoleInput.selectionFocusPosition);
+        // }
     }
 
     public void InputEntered()
@@ -81,11 +96,11 @@ public class Console2 : Singleton<Console2> {
 
         string[] lines = ConsoleInput.text.Split('\n');
 
-        for (int i = 0; i < lines.Length; i++)
-        {
-            if(CurrentRunLines.Count>i && !string.IsNullOrEmpty(CurrentRunLines[i].feedback))
-                lines[i] = lines[i].Remove(lines[i].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
-        }
+        //for (int i = 0; i < lines.Length; i++)
+        //{
+        //    if(CurrentRunLines.Count>i && !string.IsNullOrEmpty(CurrentRunLines[i].feedback))
+        //        lines[i] = lines[i].Remove(lines[i].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
+        //}
 
         CurrentRunLines.Clear();
 
@@ -115,12 +130,18 @@ public class Console2 : Singleton<Console2> {
     public void AddFeedback(int line, string feedback)
     {
         //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        CurrentRunLines[line].feedback = "";
-        CurrentRunLines[line].feedback = " <color=red>" + feedback + "</color>";
+        // CurrentRunLines[line].feedback = "";
+        CurrentRunLines[line].feedback = feedback;// " <color=red>" + feedback + "</color>";
+       // CurrentRunLines[line].code = " <color=red>" + feedback + "</color>";
         ConsoleInput.text = "";
         for (int i = 0; i < CurrentRunLines.Count; i++)
-            ConsoleInput.text += (i == 0 ? "": "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
-      //  CurrentRunLines.Clear();
+            if (i == line)
+                ConsoleInput.text += (i == 0 ? "" : "\n") + "<color=red>" + CurrentRunLines[i].code + "</color>";
+            else
+                ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
+
+        DebugOutput.text = "<color=red>" + feedback + "</color>\n" + DebugOutput.text;
+        //  CurrentRunLines.Clear();
     }
 
     void ClearFeedback()

@@ -71,6 +71,13 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                     {
                         int bracket = usedCommandsList[i].IndexOf('(');
                         int comma = usedCommandsList[i].IndexOf(',');
+
+                        if(comma<0)
+                        {
+                            Console2.Instance.AddFeedback(i, "wrong number of arguments");
+                            return;
+                        }
+
                         string param1 = usedCommandsList[i].Substring(bracket+1, comma - (bracket + 1)).Replace(" ", string.Empty); 
                         directionType dir;
                         //check direction
