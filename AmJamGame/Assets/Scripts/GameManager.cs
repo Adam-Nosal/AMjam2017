@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
     public List<Tile> tiles = new List<Tile>();
     public List<InteractableObject> interactables = new List<InteractableObject>();
 
+    private int commandsNum = 0;
+
     void Awake()
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
@@ -43,12 +45,37 @@ public class GameManager : Singleton<GameManager>
 
     public void ExecuteCommands(List<ActorCommand> commands)
     {
-        commandsManager.Clear();
+        commandsNum = 0;
+        ResetGame();
 
         foreach (var command in commands)
+        {
+            commandsNum += 1;
             commandsManager.AddToQueue(command);
+            command.OnExecutionComplete += Command_OnExecutionComplete;
+        }
 
         isCodeRunning = true;
+    }
+
+    private void Command_OnExecutionComplete(ICommand command)
+    {
+        var actorCommand = command as ActorCommand;
+        if(actorCommand.ExecutionProgress == ActorCommand.EExecutionProgress.FAILED)
+        {
+            commandsNum = 0;
+            commandsManager.Clear();
+            Failed();
+
+            isCodeRunning = false;
+
+            return;
+        }
+
+        commandsNum--;
+
+        if (commandsNum <= 0)
+            isCodeRunning = false;
     }
 
     public void StopExecution()
@@ -156,9 +183,16 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("Level complete!");
     }
+    public void Failed()
+    {
+        Debug.Log("Failed");
+    }
 
     public void ResetGame()
     {
+        isCodeRunning = false;
+        commandsNum = 0;
+
         var act = possessionHistory[0];
         possessionHistory = new List<Actor>();
         possessionHistory.Add(act);
@@ -179,11 +213,5 @@ public class GameManager : Singleton<GameManager>
             UnregisterInteractable(allInteractiables[i]);
             allInteractiables[i].ResetInteractiable();
         }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            ResetGame();
     }
 }

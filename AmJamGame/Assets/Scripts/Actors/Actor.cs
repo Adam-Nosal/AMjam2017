@@ -83,7 +83,7 @@ public abstract class Actor : MonoBehaviour
 
         string result = ValidatePosition((int)newPosition.x, (int)newPosition.y);
 
-        if (string.IsNullOrEmpty(result))
+        if (!result.Contains("Blocked"))
         {
             transform.localPosition = newPosition;
         }
