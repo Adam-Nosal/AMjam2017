@@ -13,6 +13,7 @@ public class WorldManager : Singleton<WorldManager>
     private string audioLibraryPath = "mainAudioLibrary";
 
     public SoundManager soundManager;
+    public CameraControl cameraControl;
 
     private int currentLevel = 0;                                  //Current level number
     
@@ -32,6 +33,8 @@ public class WorldManager : Singleton<WorldManager>
       //  soundManager.PlayAmbient();
     }
 
+
+
     void InitSoundManager()
     {
         this.soundManager = SoundManager.Instance;
@@ -50,6 +53,14 @@ public class WorldManager : Singleton<WorldManager>
         if (audioLibrary == null)
         {
             audioLibrary = Resources.Load(audioLibraryPath) as AudioLibrary;
+        }
+    }
+
+    void InitCameraControl()
+    {
+        if(cameraControl == null)
+        {
+            cameraControl = Camera.main.GetComponent<CameraControl>();
         }
     }
 
@@ -73,6 +84,12 @@ public class WorldManager : Singleton<WorldManager>
     {
         InitAudioLibrary();
         return audioLibrary;
+    }
+
+    public void ScreenShake()
+    {
+        InitCameraControl();
+        cameraControl.TestShake();
     }
 }
 

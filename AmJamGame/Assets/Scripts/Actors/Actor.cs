@@ -86,6 +86,7 @@ public abstract class Actor : MonoBehaviour
 
         if (!result.Contains("Blocked"))
         {
+
             transform.localPosition = newPosition;
 
             if (result.Contains("Win"))
@@ -93,6 +94,11 @@ public abstract class Actor : MonoBehaviour
                 GameManager.Instance.CompleteLevel();
                 return string.Empty;
             }
+        }
+        else
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Block);
+            WorldManager.Instance.ScreenShake();
         }
 
         return result;
@@ -168,6 +174,7 @@ public abstract class Actor : MonoBehaviour
 
     public void PrintPossess()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Possess);
         Console2.Instance.AddFeedback(-1, textsPossess[Random.Range(0, textsPossess.Length)], "white");
     }
 
