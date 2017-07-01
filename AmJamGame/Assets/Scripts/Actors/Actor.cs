@@ -104,7 +104,10 @@ public abstract class Actor : MonoBehaviour
     {
         var tile = GameManager.Instance.GetTileAtPosition(x, y);
 
-        for(int i = 0; i < hazards.Length; i++)
+        if(tile == null)
+            return "Killed by void";
+
+        for (int i = 0; i < hazards.Length; i++)
         {
             if (tile.tag == hazards[i])
                 return "Killed by: " + tile.tileName;

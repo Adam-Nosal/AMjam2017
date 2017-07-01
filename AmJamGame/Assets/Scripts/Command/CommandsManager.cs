@@ -155,7 +155,9 @@ public class CommandsManager
     {
         pendingCommands = new List<ICommand>();
 
-        foreach (var command in activeCommands)
+        var activeCommandsTemp = new List<ICommand>(activeCommands);
+
+        foreach (var command in activeCommandsTemp)
             command.Abort();
 
         activeCommands = new List<ICommand>();        

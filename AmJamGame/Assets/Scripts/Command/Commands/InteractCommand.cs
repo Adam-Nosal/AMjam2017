@@ -10,7 +10,14 @@ public class InteractCommand : ActorCommand
 
     public override void Execute()
     {
-        base.Execute();
+        base.Execute();        
+
+        coroutine = GameManager.Instance.StartCoroutine(ExecuteDelayed());
+        
+    }
+
+private IEnumerator ExecuteDelayed()
+{
         ExecutionResult = actor.MakeInteraction();
 
         if (string.IsNullOrEmpty(ExecutionResult))
@@ -19,5 +26,6 @@ public class InteractCommand : ActorCommand
             ExecutionProgress = EExecutionProgress.FAILED;
 
         Abort();
+        yield return new WaitForSeconds(1f);
     }
 }
