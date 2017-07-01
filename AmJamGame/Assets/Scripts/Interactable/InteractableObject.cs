@@ -14,4 +14,13 @@ public class InteractableObject : MonoBehaviour
     {
 
     }
+
+    public virtual void ResetInteractiable()
+    {
+        var renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rendr in renderers)
+            rendr.enabled = true;
+
+        GameManager.Instance.RegisterInteractable(this);
+    }
 }

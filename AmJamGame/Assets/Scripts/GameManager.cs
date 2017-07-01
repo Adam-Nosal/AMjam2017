@@ -25,20 +25,20 @@ public class GameManager : Singleton<GameManager>
 
         yield return new WaitForSeconds(3f);
 
-        /*var l = new List<ActorCommand>();
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 2));
-        l.Add(new PossessCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
-        l.Add(new InteractCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 3));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.left, 5));
-        l.Add(new PossessCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //var l = new List<ActorCommand>();
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 2));
+        //l.Add(new PossessCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
+        //l.Add(new InteractCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 3));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.left, 5));
+        //l.Add(new PossessCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
 
-        ExecuteCommands(l);*/
+        //ExecuteCommands(l);
     }
 
     public void ExecuteCommands(List<ActorCommand> commands)
@@ -155,5 +155,35 @@ public class GameManager : Singleton<GameManager>
     public void CompleteLevel()
     {
         Debug.Log("Level complete!");
+    }
+
+    public void ResetGame()
+    {
+        var act = possessionHistory[0];
+        possessionHistory = new List<Actor>();
+        possessionHistory.Add(act);
+
+        commandsManager.Clear();
+
+        var allActors = GetComponentsInChildren<Actor>();
+        var allInteractiables = GetComponentsInChildren<InteractableObject>();
+
+        for(int i = 0; i < allActors.Length; i++)
+        {
+            UregisterActor(allActors[i]);
+            allActors[i].ResetActor();
+        }
+
+        for (int i = 0; i < allInteractiables.Length; i++)
+        {
+            UnregisterInteractable(allInteractiables[i]);
+            allInteractiables[i].ResetInteractiable();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            ResetGame();
     }
 }
