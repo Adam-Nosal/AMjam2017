@@ -13,6 +13,8 @@ public abstract class Actor : MonoBehaviour
     [TagSelector]
     public string[] interactables = new string[] { };
 
+    public string[] textsPossess;
+
     public int movementStep = 1;
     public Vector3 initialPosition;
     protected int tileSize = 1;
@@ -145,12 +147,19 @@ public abstract class Actor : MonoBehaviour
     public void SetPossessed(bool possess)
     {
         if (possess)
+        {            
             StartCoroutine("PossessAnim");
+        }            
         else
         {
             StopCoroutine("PossessAnim");
             gameObject.GetComponentInChildren<SpriteRenderer>().material.SetFloat("_InvertColors", 0f);
         }
+    }
+
+    public void PrintPossess()
+    {
+        Console2.Instance.AddFeedback(-1, textsPossess[Random.Range(0, textsPossess.Length)], "white");
     }
 
     public IEnumerator PossessAnim()
