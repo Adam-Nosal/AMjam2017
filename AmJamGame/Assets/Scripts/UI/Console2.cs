@@ -165,7 +165,7 @@ public class Console2 : Singleton<Console2> {
 
     void UpdateScores()
     {
-        Scores.text = string.Format("Revision: {0}\nLines: {1}", GameManager.Instance.executionsCount, ConsoleInput.text.Split('\n').Length);
+        Scores.text = string.Format("Revision: {0}\n\nLines: {1}", GameManager.Instance.executionsCount, ConsoleInput.text.Split('\n').Length);
 
     }
 }
