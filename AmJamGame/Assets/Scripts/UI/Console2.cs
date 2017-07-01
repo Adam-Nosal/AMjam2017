@@ -156,7 +156,5 @@ public class Console2 : Singleton<Console2> {
             DebugOutput.text = "\n" + DebugOutput.text;
 
         DebugOutput.GetComponent<TextTyper>().AppendText(feedback, "<color=red>{0}</color>");
-        //DebugOutput.text = "<color=red>" + feedback + "</color>\n" + DebugOutput.text;
-        //  CurrentRunLines.Clear();
     }
 }
