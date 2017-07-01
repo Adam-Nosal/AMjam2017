@@ -140,7 +140,11 @@ public class Console2 : Singleton<Console2> {
             else
                 ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
 
-        DebugOutput.text = "<color=red>" + feedback + "</color>\n" + DebugOutput.text;
+        if (!string.IsNullOrEmpty(DebugOutput.text))
+            DebugOutput.text = "\n" + DebugOutput.text;
+
+        DebugOutput.GetComponent<TextTyper>().AppendText(feedback, "<color=red>{0}</color>");
+        //DebugOutput.text = "<color=red>" + feedback + "</color>\n" + DebugOutput.text;
         //  CurrentRunLines.Clear();
     }
 
