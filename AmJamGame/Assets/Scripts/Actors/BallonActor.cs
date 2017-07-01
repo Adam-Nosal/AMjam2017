@@ -9,7 +9,8 @@ public class BallonActor : Actor
     {
         string result = string.Empty;
 
-        while(result == string.Empty)
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.StepBalon);
+        while (result == string.Empty)
         {
             result = base.Move(direction);
         }

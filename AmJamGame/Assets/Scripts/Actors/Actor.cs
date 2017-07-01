@@ -66,7 +66,6 @@ public abstract class Actor : MonoBehaviour
     public virtual string Move(directionType direction)
     {
         var newPosition = transform.localPosition;
-
         switch (direction)
         {
             case directionType.up:

@@ -45,10 +45,25 @@ public class SoundManager : Singleton<SoundManager> {
 
     public void PlayEffect( AudioLibrary.soundEffects origin)
     {
-        effectsAudioSource.clip = audioLibrary.GetAudioClip(origin);
-   
-        effectsAudioSource.Play();
+        AudioClip clip = audioLibrary.GetAudioClip(origin);
+        if (clip != null)
+        {
+            effectsAudioSource.clip = clip;
+
+            effectsAudioSource.Play();
+        }
     }
-    
-    
+
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.KeyboardEnter);
+        }else if(Input.anyKeyDown== true)
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.KeyboardTypes);
+        }
+    }
+
 }

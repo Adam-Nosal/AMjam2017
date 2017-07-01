@@ -27,7 +27,7 @@ public class PossessCommand : ActorCommand
         }
         else
         {
-            Console2.Instance.AddFeedback(lineNumber, "Here is nothing I can possess...", "red");
+            Console2.Instance.AddFeedback(lineNumber, "There's nothing to possess here...", "red");
             ExecutionProgress = EExecutionProgress.FAILED;
         }            
 

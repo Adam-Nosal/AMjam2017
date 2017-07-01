@@ -210,14 +210,18 @@ public class GameManager : Singleton<GameManager>
 
         Debug.Log("Level complete!");
         WorldManager.Instance.LoadNextLevel();
+
     }
     public void Failed()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Fail);
+
         Debug.Log("Failed");
     }
 
     public void ResetGame()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.RunProgram);
         GetPossessedActor().SetPossessed(false);
         isCodeRunning = false;
         commandsNum = 0;
