@@ -25,7 +25,7 @@ public class Console2 : Singleton<Console2> {
     // Use this for initialization
     void Start () {
        
-       // ConsoleInput.OnSubmit += InputEntered;
+        //ConsoleInput.OnSubmit += InputEntered;
 
     }
 	
@@ -103,9 +103,15 @@ public class Console2 : Singleton<Console2> {
 
     public void RunButtonClicked()
     {
+
         GameManager.Instance.executionsCount++;        
 
-        string[] lines = ConsoleInput.text.Split('\n');      
+        //  CurrentRunLines.Clear();
+        // string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        //  ClearFeedback();
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.RunProgram);
+        string[] lines = ConsoleInput.text.Split('\n');
+    
 
         if (sthChangedInInput)
         {

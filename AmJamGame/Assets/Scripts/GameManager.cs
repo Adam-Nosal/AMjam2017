@@ -206,9 +206,7 @@ public class GameManager : Singleton<GameManager>
 
     public void CompleteLevel()
     {
-        Console2.Instance.AddFeedback(-1, textsb[Random.Range(0, textsb.Length)], "green");
-
-        Debug.Log("Level complete!");
+Console2.Instance.AddFeedback(-1, textsb[Random.Range(0, textsb.Length)], "green"); WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Success);        Debug.Log("Level complete!");
         WorldManager.Instance.LoadNextLevel();
 
     }
