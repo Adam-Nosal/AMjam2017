@@ -34,22 +34,21 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
         if (usedCommandsList.Count == 0)
         {
-            Console.Instance.AddFeedback(0, 0, "Type sth you idiot!");
+            Console.Instance.AddFeedback(0,  "Type sth you idiot!");
             return;
-        }
-        
+        }        
 
         for (int i = 0; i < usedCommandsList.Count; i++)
         {
-            if (usedCommandsList[i].Length == 0)
+            if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
             {
-                Console.Instance.AddFeedback(i, 0, "Type sth you idiot!");
+                Console.Instance.AddFeedback(i,  "Type sth you idiot!");
                 usedCommandsList.Clear();
                 return;
             }
-            if (usedCommandsList[i].IndexOf('(') < 1)
+            if (usedCommandsList[i].IndexOf('(') < 0)
             {
-                Console.Instance.AddFeedback(i, 0, "you forgot about brackets again...");
+                Console.Instance.AddFeedback(i,  "you forgot about brackets again...");
                 return;
             }
 
@@ -57,7 +56,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
             if (commandsList.Find(x => x == commandName) == null) // command not found
             {
-                Console.Instance.AddFeedback(0, 0, "Command not found!");
+                Console.Instance.AddFeedback(i, "Command not found!");
                 return;
             }
 
@@ -67,7 +66,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                     {
                         int bracket = usedCommandsList[i].IndexOf('(');
                         int comma = usedCommandsList[i].IndexOf(',');
-                        string param1 = usedCommandsList[i].Substring(bracket+1, comma - (bracket + 1));
+                        string param1 = usedCommandsList[i].Substring(bracket+1, comma - (bracket + 1)).Replace(" ", string.Empty); 
                         directionType dir;
                         //check direction
                         try {
@@ -75,16 +74,19 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         }
                         catch(Exception e)
                         {
+                            Console.Instance.AddFeedback(i, "wrong first argument");
                             return;
                         }
 
                         //check number
                         int iterations;
-                        int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (comma + 1)), out iterations);
+                        int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (comma + 1)).Replace(" ", string.Empty), out iterations);
                         if (iterations == 0)
-                            return;    
-
-                        //tmp
+                        {
+                            Console.Instance.AddFeedback(i, "wrong second argument");
+                            return;
+                        }  
+                        
                         MoveCommand move = new MoveCommand(actor, i, dir, iterations);
                         commands.Add(move);
                         break;
@@ -102,7 +104,14 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         break;
                     }
             }
+
+            if (usedCommandsList[i].IndexOf(");") == usedCommandsList[i].Length - 2);
+            {
+                Console.Instance.AddFeedback(i, "method should end with semicolon");
+                return;
+            }
         }
+
 
         usedCommandsList.Clear();
 

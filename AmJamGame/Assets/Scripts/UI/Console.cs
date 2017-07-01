@@ -30,8 +30,8 @@ public class Console : Singleton<Console> {
 
     public void InputEntered()
     {
-        EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
-        ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
+      //  EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
+     //   ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
 
         Debug.Log(ConsoleInput.text);
         CurrentRunLines.Add(ConsoleInput.text);
@@ -47,11 +47,11 @@ public class Console : Singleton<Console> {
         CommandInterpreter.Instance.usedCommandsList.Clear();
        // ConsoleOutputText.text += "\n<color=yellow>RUN</color>";
        // CurrentRunLines.Add("\n<color=yellow>RUN</color>");
-        previousLinesCount += CurrentRunLines.Count;
+        previousLinesCount += CurrentRunLines.Count - previousLinesCount;
 
     }
 
-    public void AddFeedback(int line, int position, string feedback)
+    public void AddFeedback(int line, string feedback)
     {
         //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         CurrentRunLines[previousLinesCount + line] += " <color=red>" + feedback + "</color>";
