@@ -45,13 +45,14 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
         for (int i = 0; i < usedCommandsList.Count; i++)
         {
-            //if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
-            //{
-            //    Console2.Instance.AddFeedback(i,  "Type sth you idiot!");
-            //    usedCommandsList.Clear();
-            //    return;
-            //}
-            if (usedCommandsList[i].IndexOf('(') < 0)
+            if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
+            {
+               // Console2.Instance.AddFeedback(i, "Type sth you idiot!");
+              //  usedCommandsList.Clear();
+                return;
+            }
+
+            if (usedCommandsList[i].IndexOf('(') < 0 )
             {
                 Console2.Instance.AddFeedback(i,  "you forgot about brackets again...");
                 return;
