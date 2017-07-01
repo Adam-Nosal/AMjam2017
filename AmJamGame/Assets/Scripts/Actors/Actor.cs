@@ -88,6 +88,12 @@ public abstract class Actor : MonoBehaviour
         if (!result.Contains("Blocked"))
         {
             transform.localPosition = newPosition;
+
+            if (result.Contains("Win"))
+            {
+                GameManager.Instance.CompleteLevel();
+                return string.Empty;
+            }
         }
 
         return result;
@@ -109,7 +115,11 @@ public abstract class Actor : MonoBehaviour
         if(tile == null)
             return "Killed by void";
 
-        for (int i = 0; i < interactables.Length; i++)
+        if (tile.tag == "LevelFinish")
+            return "Win";
+
+
+            for (int i = 0; i < interactables.Length; i++)
         {
             if (interactables[i] == "Actor")
             {
