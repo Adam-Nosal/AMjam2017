@@ -11,7 +11,8 @@ public class MenuCommandInterpreter : Singleton<MenuCommandInterpreter>
         {
             "start",
             "exit",
-            "credits"
+            "credits",
+            "shake"
         };
 
     WorldManager worldManager;
@@ -82,6 +83,11 @@ public class MenuCommandInterpreter : Singleton<MenuCommandInterpreter>
                 case "credits":
                     {
                         menuManager.PrintCredits();
+                        break;
+                    }
+                case "shake":
+                    {
+                        Camera.main.GetComponent<CameraControl>().Shake(5.0f, 10, 10);
                         break;
                     }
             }

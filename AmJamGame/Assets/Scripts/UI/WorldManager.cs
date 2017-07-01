@@ -8,6 +8,12 @@ public class WorldManager : Singleton<WorldManager>
     [SerializeField]
     private LevelHolder levelHolder;
     private string levelHolderPath = "mainLevelHolder";
+    [SerializeField]
+    private AudioLibrary audioLibrary;
+    private string audioLibraryPath = "mainAudioLibrary";
+
+    public SoundManager soundManager;
+
     private int currentLevel = 0;                                  //Current level number
     
     void Awake()
@@ -16,6 +22,19 @@ public class WorldManager : Singleton<WorldManager>
         DontDestroyOnLoad(this.gameObject);
 
         InitLevelHolder();
+        InitAudioLibrary();
+        InitSoundManager();
+    }
+
+    private void Start()
+    {
+
+      //  soundManager.PlayAmbient();
+    }
+
+    void InitSoundManager()
+    {
+        this.soundManager = SoundManager.Instance;
     }
 
     void InitLevelHolder()
@@ -23,6 +42,14 @@ public class WorldManager : Singleton<WorldManager>
         if (levelHolder == null)
         {
             levelHolder = Resources.Load(levelHolderPath) as LevelHolder;
+        }
+    }
+
+    void InitAudioLibrary()
+    {
+        if (audioLibrary == null)
+        {
+            audioLibrary = Resources.Load(audioLibraryPath) as AudioLibrary;
         }
     }
 
@@ -40,6 +67,12 @@ public class WorldManager : Singleton<WorldManager>
         currentLevel++;
         levelHolder.LoadLevel(currentLevel);
 
+    }
+
+    public AudioLibrary GetAudioLibrary()
+    {
+        InitAudioLibrary();
+        return audioLibrary;
     }
 }
 
