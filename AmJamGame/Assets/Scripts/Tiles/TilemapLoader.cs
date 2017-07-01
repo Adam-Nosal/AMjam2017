@@ -11,7 +11,7 @@ public class TilemapLoader
         string json = Resources.Load<TextAsset>(file).text;
 		Map map = JsonUtility.FromJson<Map>(json);
 
-        int max = map.tilesets[1].firstgid;
+        int max = map.tilesets[0].firstgid;
 
         MapObject result = new MapObject(map.width, map.height);
 
@@ -21,25 +21,25 @@ public class TilemapLoader
             {
                 int i = y * map.width + x;
                 int idx = map.layers[0].data[i];
-                int roomCode = map.layers[1].data[i];
+               // int roomCode = map.layers[1].data[i];
                 GameObject go = result.gos[x, y] = GameObject.Instantiate(Tileset.Instance.GetTile(idx), parent);
 
 
                 go.transform.localPosition = new Vector2(x - map.width / 2, -y + map.height / 2);
-                if(roomCode == 0)
-                {
-                    result.AddToRoom(0, go);
-                }
-                else
-                {
-                    roomCode = roomCode - max + 1;
-                    Interactable interactable = go.GetComponent<Interactable>();
-                    if(interactable != null)
-                    {
-                        interactable.InRoom(roomCode);
-                    }
-                    result.AddToRoom(roomCode, go);
-                }
+                //if(roomCode == 0)
+                //{
+                //    result.AddToRoom(0, go);
+                //}
+                //else
+                //{
+                //    roomCode = roomCode - max + 1;
+                //    Interactable interactable = go.GetComponent<Interactable>();
+                //    if(interactable != null)
+                //    {
+                //        interactable.InRoom(roomCode);
+                //    }
+                //    result.AddToRoom(roomCode, go);
+                //}
             }
         }
 
