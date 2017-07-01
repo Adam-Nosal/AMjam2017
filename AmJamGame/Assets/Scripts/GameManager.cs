@@ -34,6 +34,7 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator Start()
     {
+        GetPossessedActor().SetPossessed(true);
         StartCoroutine(CustomUpdate());
 
         yield return new WaitForSeconds(3f);
@@ -143,10 +144,12 @@ public class GameManager : Singleton<GameManager>
         if (possessedActor != null)
         {
             possessedActor.transform.localPosition = new Vector3(possessedActor.transform.localPosition.x, possessedActor.transform.localPosition.y, 0);
+            possessedActor.SetPossessed(false);
         }
 
         possessionHistory.Add(actor);
         GetPossessedActor().transform.localPosition = new Vector3(possessedActor.transform.localPosition.x, possessedActor.transform.localPosition.y, -1);
+        GetPossessedActor().SetPossessed(true);
         camera2D.SetNewTarget(GetPossessedActor().gameObject);
     }
 

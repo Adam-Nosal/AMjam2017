@@ -141,4 +141,25 @@ public abstract class Actor : MonoBehaviour
         transform.localPosition = initialPosition;
         GameManager.Instance.RegisterActor(this); 
     }
+
+    public void SetPossessed(bool possess)
+    {
+        if (possess)
+            StartCoroutine("PossessAnim");
+        else
+        {
+            StopCoroutine("PossessAnim");
+            gameObject.GetComponentInChildren<SpriteRenderer>().material.SetFloat("_InvertColors", 0f);
+        }
+    }
+
+    public IEnumerator PossessAnim()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponentInChildren<SpriteRenderer>().material.SetFloat("_InvertColors", 1f);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponentInChildren<SpriteRenderer>().material.SetFloat("_InvertColors", 0f);
+
+        StartCoroutine("PossessAnim");
+    }
 }
