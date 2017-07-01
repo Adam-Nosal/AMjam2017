@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e1cf46fd36dccd64ba071699ec202e80
-timeCreated: 1498915394
+timeCreated: 1498916745
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -259,10 +259,10 @@ TextureImporter:
       name: TILEMAP2_12
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 41
-        width: 20
-        height: 19
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +272,10 @@ TextureImporter:
       name: TILEMAP2_13
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 41
-        width: 20
-        height: 19
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,10 +285,10 @@ TextureImporter:
       name: TILEMAP2_14
       rect:
         serializedVersion: 2
-        x: 40
-        y: 40
-        width: 20
-        height: 20
+        x: 41
+        y: 41
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,10 +311,10 @@ TextureImporter:
       name: TILEMAP2_16
       rect:
         serializedVersion: 2
-        x: 80
-        y: 40
-        width: 20
-        height: 20
+        x: 81
+        y: 41
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,9 +337,9 @@ TextureImporter:
       name: TILEMAP2_18
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -350,9 +350,9 @@ TextureImporter:
       name: TILEMAP2_19
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -363,9 +363,9 @@ TextureImporter:
       name: TILEMAP2_20
       rect:
         serializedVersion: 2
-        x: 40
+        x: 41
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -389,9 +389,9 @@ TextureImporter:
       name: TILEMAP2_22
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -402,9 +402,9 @@ TextureImporter:
       name: TILEMAP2_23
       rect:
         serializedVersion: 2
-        x: 100
+        x: 101
         y: 21
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -428,9 +428,9 @@ TextureImporter:
       name: TILEMAP2_25
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 1
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -441,9 +441,9 @@ TextureImporter:
       name: TILEMAP2_26
       rect:
         serializedVersion: 2
-        x: 40
+        x: 41
         y: 1
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -454,9 +454,9 @@ TextureImporter:
       name: TILEMAP2_27
       rect:
         serializedVersion: 2
-        x: 60
+        x: 61
         y: 1
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -467,9 +467,9 @@ TextureImporter:
       name: TILEMAP2_28
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 1
-        width: 20
+        width: 18
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

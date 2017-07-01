@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     public JumpCamera2D camera2D;
 
     private int commandsNum = 0;
-
+    
     void Awake()
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     {
         GetPossessedActor().SetPossessed(true);
         StartCoroutine(CustomUpdate());
-
+      //  WorldManager.Instance.soundManager.PlayAmbient();
         yield return new WaitForSeconds(3f);
 
         /*var l = new List<ActorCommand>();
