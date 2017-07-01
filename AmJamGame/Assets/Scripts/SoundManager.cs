@@ -24,7 +24,7 @@ public class SoundManager : Singleton<SoundManager> {
         {
             ambientAudioSource = this.gameObject.AddComponent<AudioSource>();
             ambientAudioSource.clip = audioLibrary.GetAmbientClip();
-            ambientAudioSource.volume = ambientVolume;
+            ambientAudioSource.volume = audioLibrary.AmbientClipsVolume;
             ambientAudioSource.loop = true;
         }
         if (effectsAudioSource == null)
@@ -39,7 +39,6 @@ public class SoundManager : Singleton<SoundManager> {
     [ContextMenu("PlayAmbient")]
     public void PlayAmbient()
     {
-
         ambientAudioSource.Play();
     }
 
@@ -49,7 +48,7 @@ public class SoundManager : Singleton<SoundManager> {
         if (clip != null)
         {
             effectsAudioSource.clip = clip;
-
+            effectsAudioSource.volume = audioLibrary.GetAudioVolume(origin);
             effectsAudioSource.Play();
         }
     }

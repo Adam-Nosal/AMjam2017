@@ -15,6 +15,7 @@ public class Console2 : Singleton<Console2> {
 
     public InputField ConsoleInput;
     public Text DebugOutput;
+    public Text Scores;
 
     private List<LineWithFeedback> CurrentRunLines = new List<LineWithFeedback>();
     private int previousLinesCount = 0;
@@ -46,6 +47,11 @@ public class Console2 : Singleton<Console2> {
                     ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
                 }
            }
+        }
+
+       if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete))
+        {
+            UpdateScores();
         }
 
        //// Debug.Log(ConsoleInput.selectionFocusPosition);
@@ -97,17 +103,15 @@ public class Console2 : Singleton<Console2> {
 
     public void RunButtonClicked()
     {
+
+        GameManager.Instance.executionsCount++;        
+
         //  CurrentRunLines.Clear();
         // string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         //  ClearFeedback();
         WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.RunProgram);
         string[] lines = ConsoleInput.text.Split('\n');
-
-        //for (int i = 0; i < lines.Length; i++)
-        //{
-        //    if(CurrentRunLines.Count>i && !string.IsNullOrEmpty(CurrentRunLines[i].feedback))
-        //        lines[i] = lines[i].Remove(lines[i].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
-        //}
+    
 
         if (sthChangedInInput)
         {
@@ -119,9 +123,7 @@ public class Console2 : Singleton<Console2> {
             for (int i = 0; i < CurrentRunLines.Count; i++)
                 ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
         }
-
-
-
+        
         for (int i=0;i< lines.Length;i++)
         {
             if (sthChangedInInput)
@@ -133,10 +135,7 @@ public class Console2 : Singleton<Console2> {
         CommandInterpreter.Instance.InterpretCommands();
         CommandInterpreter.Instance.usedCommandsList.Clear();
 
-        // ConsoleOutputText.text += "\n<color=yellow>RUN</color>";
-        // CurrentRunLines.Add("\n<color=yellow>RUN</color>");
-       // previousLinesCount += CurrentRunLines.Count - previousLinesCount;
-
+        UpdateScores();
     }
 
     public void AddFeedback(int line, string feedback, string color="red")
@@ -162,5 +161,11 @@ public class Console2 : Singleton<Console2> {
         
 
         DebugOutput.GetComponent<TextTyper>().AppendText(feedback, colorKey + "{0}</color>");
+    }
+
+    void UpdateScores()
+    {
+        Scores.text = string.Format("Revision: {0}\n\nLines: {1}", GameManager.Instance.executionsCount, ConsoleInput.text.Split('\n').Length);
+
     }
 }

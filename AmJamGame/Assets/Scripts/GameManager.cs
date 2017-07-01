@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     public CommandsManager commandsManager;
     public bool isCodeRunning = false;
+    public int executionsCount;
 
     public List<Actor> possessionHistory;
 
@@ -24,6 +25,7 @@ public class GameManager : Singleton<GameManager>
     };
 
     private int commandsNum = 0;
+
     
     void Awake()
     {
