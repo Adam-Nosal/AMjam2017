@@ -7,7 +7,7 @@ public enum directionType { up, down, left, right }
 
 public class CommandInterpreter : Singleton<CommandInterpreter>
 {
-
+    Actor actor;
     List<string> commandsList;
     // Use this for initialization
     void Start()
@@ -30,20 +30,36 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
     public void InterpretCommands()
     {
-        List<ActorCommand> commands = new List<ActorCommand>();
+        List<ActorCommand> commands = new List<ActorCommand>();        
 
         if (usedCommandsList.Count == 0)
+        {
+            Console.Instance.AddFeedback(0, 0, "Type sth you idiot!");
             return;
+        }
+        
 
-        for (int i = 0; i <= usedCommandsList.Count; i++)
+        for (int i = 0; i < usedCommandsList.Count; i++)
         {
             if (usedCommandsList[i].Length == 0)
+            {
+                Console.Instance.AddFeedback(i, 0, "Type sth you idiot!");
+                usedCommandsList.Clear();
                 return;
+            }
+            if (usedCommandsList[i].IndexOf('(') < 1)
+            {
+                Console.Instance.AddFeedback(i, 0, "you forgot about brackets again...");
+                return;
+            }
 
             string commandName = usedCommandsList[i].Substring(0, usedCommandsList[i].IndexOf('('));
 
-            if (usedCommandsList.Find(x => x == usedCommandsList[i]) == null) // command not found
+            if (commandsList.Find(x => x == commandName) == null) // command not found
+            {
+                Console.Instance.AddFeedback(0, 0, "Command not found!");
                 return;
+            }
 
             switch (commandName)
             {
@@ -69,21 +85,36 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                             return;    
 
                         //tmp
-                        MoveCommand move = new MoveCommand(null, i, dir, iterations);
+                        MoveCommand move = new MoveCommand(actor, i, dir, iterations);
                         commands.Add(move);
                         break;
                     }
                 case "interact":
                     {
-
+                        InteractCommand move = new InteractCommand(actor, i);
+                        commands.Add(move);
                         break;
                     }
                 case "possess":
                     {
+                        PossessCommand move = new PossessCommand(actor, i);
+                        commands.Add(move);
                         break;
                     }
             }
         }
+
+        usedCommandsList.Clear();
+
+        Debug.Log("commands to execute:");
+        foreach (var com in commands)
+            Debug.Log(com.Name);
+
         GameManager.Instance.ExecuteCommands(commands);
+    }
+
+    void InitialElementsCheck(string command)
+    {
+
     }
 }

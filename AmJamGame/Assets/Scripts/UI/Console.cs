@@ -1,14 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Console : MonoBehaviour {
+public class Console : Singleton<Console> {
 
     public InputField ConsoleInput;
+    public Text ConsoleOutputText;
 
-	// Use this for initialization
-	void Start () {
+    private List<string> CurrentRunLines = new List<string>();
+    private int previousLinesCount = 0;
+
+    // Use this for initialization
+    void Start () {
        // ConsoleInput.OnSubmit += InputEntered;
 
     }
@@ -25,12 +30,29 @@ public class Console : MonoBehaviour {
     public void InputEntered()
     {
         Debug.Log(ConsoleInput.text);
+        CurrentRunLines.Add(ConsoleInput.text);
+        ConsoleOutputText.text += "\n" + ConsoleInput.text;
         CommandInterpreter.Instance.usedCommandsList.Add(ConsoleInput.text);
-
-        CommandInterpreter.Instance.InterpretCommands();
-       // bool isRecognisible = CommandInterpreter.Instance.InterpretCommand(ConsoleInput.text);
-
-        ///   if()
+        ConsoleInput.text = "";
     }
 
+    public void RunButtonClicked()
+    {
+        //  CurrentRunLines.Clear();
+        CommandInterpreter.Instance.InterpretCommands();
+        CommandInterpreter.Instance.usedCommandsList.Clear();
+       // ConsoleOutputText.text += "\n<color=yellow>RUN</color>";
+       // CurrentRunLines.Add("\n<color=yellow>RUN</color>");
+        previousLinesCount += CurrentRunLines.Count;
+
+    }
+
+    public void AddFeedback(int line, int position, string feedback)
+    {
+        //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        CurrentRunLines[previousLinesCount + line] += " <color=red>" + feedback + "</color>";
+        ConsoleOutputText.text = "";
+        foreach (var ln in CurrentRunLines)
+            ConsoleOutputText.text += "\n" + ln;
+    }
 }
