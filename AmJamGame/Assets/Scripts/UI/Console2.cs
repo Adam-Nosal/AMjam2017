@@ -7,10 +7,15 @@ using UnityEngine.UI;
 
 public class Console2 : Singleton<Console2> {
 
-    public InputField ConsoleInput;
-    public Text ConsoleOutputText;
+   public class LineWithFeedback
+    {
+       public string code;
+       public string feedback;
+    }
 
-    private List<string> CurrentRunLines = new List<string>();
+    public InputField ConsoleInput;
+
+    private List<LineWithFeedback> CurrentRunLines = new List<LineWithFeedback>();
     private int previousLinesCount = 0;
 
     // Use this for initialization
@@ -21,11 +26,38 @@ public class Console2 : Singleton<Console2> {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+       // Debug.Log(ConsoleInput.selectionFocusPosition);
+        int currentLine = 0;
+        int charsInLines = 0; 
+       for(int i=0;i< CurrentRunLines.Count; i++)
         {
-            Debug.Log("enter");
-        }       
+            charsInLines += (CurrentRunLines[i].code!=null?CurrentRunLines[i].code.Length:0) + (CurrentRunLines[i].feedback != null ? CurrentRunLines[i].feedback.Length : 0);
+            if (ConsoleInput.selectionFocusPosition<=charsInLines)
+            {
+                currentLine = i;
+              //  Debug.Log("CURRENT LINE " + currentLine); 
+                break;
+            }
+        }
+
+        if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
+        {
+            string[] lines = ConsoleInput.text.Split('\n');
+            // for (int i = 0; i < lines.Length; i++)
+            //  {
+            if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
+            {
+                lines[currentLine] = lines[currentLine].Remove(lines[currentLine].IndexOf(CurrentRunLines[currentLine].feedback), CurrentRunLines[currentLine].feedback.Length);
+                CurrentRunLines[currentLine].feedback = "";
+                
+                ConsoleInput.text = "";
+                for (int i = 0; i < CurrentRunLines.Count; i++)
+                    ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
+            }
+            //  }
+            // lines[i] = lines[i].Remove(lines[ConsoleInput.selectionFocusPosition].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
+            Debug.Log(ConsoleInput.selectionFocusPosition);
+        }
     }
 
     public void InputEntered()
@@ -44,28 +76,60 @@ public class Console2 : Singleton<Console2> {
     public void RunButtonClicked()
     {
         //  CurrentRunLines.Clear();
-        string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        // string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        //  ClearFeedback();
+
+        string[] lines = ConsoleInput.text.Split('\n');
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if(CurrentRunLines.Count>i && !string.IsNullOrEmpty(CurrentRunLines[i].feedback))
+                lines[i] = lines[i].Remove(lines[i].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
+        }
+
+        CurrentRunLines.Clear();
+
+        for (int i = 0; i < CurrentRunLines.Count; i++)
+            CurrentRunLines[i].feedback = "";
+
+        for (int i = 0; i < CurrentRunLines.Count; i++)
+            ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
+
+
+
         foreach (var ln in lines)
         {
-            CurrentRunLines.Add(ln);
+            CurrentRunLines.Add( new LineWithFeedback() { code = ln });
             CommandInterpreter.Instance.usedCommandsList.Add(ln);
         }
-        CommandInterpreter.Instance.InterpretCommands();
 
+        CommandInterpreter.Instance.InterpretCommands();
         CommandInterpreter.Instance.usedCommandsList.Clear();
 
         // ConsoleOutputText.text += "\n<color=yellow>RUN</color>";
         // CurrentRunLines.Add("\n<color=yellow>RUN</color>");
-        previousLinesCount += CurrentRunLines.Count - previousLinesCount;
+       // previousLinesCount += CurrentRunLines.Count - previousLinesCount;
 
     }
 
     public void AddFeedback(int line, string feedback)
     {
         //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        CurrentRunLines[previousLinesCount + line] += " <color=red>" + feedback + "</color>";
-        ConsoleOutputText.text = "";
-        foreach (var ln in CurrentRunLines)
-            ConsoleOutputText.text += "\n" + ln;
+        CurrentRunLines[line].feedback = "";
+        CurrentRunLines[line].feedback = " <color=red>" + feedback + "</color>";
+        ConsoleInput.text = "";
+        for (int i = 0; i < CurrentRunLines.Count; i++)
+            ConsoleInput.text += (i == 0 ? "": "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
+      //  CurrentRunLines.Clear();
+    }
+
+    void ClearFeedback()
+    {
+        for (int i = 0; i < CurrentRunLines.Count; i++)
+            CurrentRunLines[i].feedback = "";
+
+        for (int i = 0; i < CurrentRunLines.Count; i++)
+            ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;;
+
     }
 }

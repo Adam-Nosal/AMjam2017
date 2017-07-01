@@ -8,16 +8,21 @@ public enum directionType { up, down, left, right }
 public class CommandInterpreter : Singleton<CommandInterpreter>
 {
     Actor actor;
-    List<string> commandsList;
-    // Use this for initialization
-    void Start()
-    {
-        commandsList = new List<string>()
+    List<string> commandsList = new List<string>()
         {
             "move",
             "interact",
             "possess"
         };
+    // Use this for initialization
+    void Start()
+    {
+        //commandsList = new List<string>()
+        //{
+        //    "move",
+        //    "interact",
+        //    "possess"
+        //};
     }
 
     public List<string> usedCommandsList = new List<string>();
@@ -25,30 +30,30 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     public void InterpretCommands()
     {
         List<ActorCommand> commands = new List<ActorCommand>();        
 
-        if (usedCommandsList.Count == 0)
-        {
-            Console.Instance.AddFeedback(0,  "Type sth you idiot!");
-            return;
-        }        
+        //if (usedCommandsList.Count == 0)
+        //{
+        //    Console2.Instance.AddFeedback(0,  "Type sth you idiot!");
+        //    return;
+        //}        
 
         for (int i = 0; i < usedCommandsList.Count; i++)
         {
-            if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
-            {
-                Console.Instance.AddFeedback(i,  "Type sth you idiot!");
-                usedCommandsList.Clear();
-                return;
-            }
+            //if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
+            //{
+            //    Console2.Instance.AddFeedback(i,  "Type sth you idiot!");
+            //    usedCommandsList.Clear();
+            //    return;
+            //}
             if (usedCommandsList[i].IndexOf('(') < 0)
             {
-                Console.Instance.AddFeedback(i,  "you forgot about brackets again...");
+                Console2.Instance.AddFeedback(i,  "you forgot about brackets again...");
                 return;
             }
 
@@ -56,7 +61,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
             if (commandsList.Find(x => x == commandName) == null) // command not found
             {
-                Console.Instance.AddFeedback(i, "Command not found!");
+                Console2.Instance.AddFeedback(i, "Command not found!");
                 return;
             }
 
@@ -74,7 +79,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         }
                         catch(Exception e)
                         {
-                            Console.Instance.AddFeedback(i, "wrong first argument");
+                            Console2.Instance.AddFeedback(i, "wrong first argument");
                             return;
                         }
 
@@ -83,7 +88,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         int.TryParse(usedCommandsList[i].Substring(comma + 1, usedCommandsList[i].IndexOf(')') - (comma + 1)).Replace(" ", string.Empty), out iterations);
                         if (iterations == 0)
                         {
-                            Console.Instance.AddFeedback(i, "wrong second argument");
+                            Console2.Instance.AddFeedback(i, "wrong second argument");
                             return;
                         }  
                         
@@ -105,9 +110,9 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                     }
             }
 
-            if (usedCommandsList[i].IndexOf(");") == usedCommandsList[i].Length - 2);
+            if (usedCommandsList[i].IndexOf(");") != usedCommandsList[i].Length - 2)
             {
-                Console.Instance.AddFeedback(i, "method should end with semicolon");
+                Console2.Instance.AddFeedback(i, "method should end with semicolon");
                 return;
             }
         }
