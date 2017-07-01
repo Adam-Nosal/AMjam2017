@@ -9,6 +9,11 @@ public class Interactable : MonoBehaviour
     private bool isEnabled = true;
     protected int roomCode;
 
+    struct Interpretation
+    {
+        bool Correctness;
+    }
+
     protected virtual IEnumerator Start()
     {
         return DisableForSeconds(delay);
