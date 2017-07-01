@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     public JumpCamera2D camera2D;
 
     private int commandsNum = 0;
-
+    
     void Awake()
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
