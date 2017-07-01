@@ -13,12 +13,23 @@ public class GameManager : Singleton<GameManager>
     public List<Tile> tiles = new List<Tile>();
     public List<InteractableObject> interactables = new List<InteractableObject>();
 
+    public JumpCamera2D camera2D;
+
     private int commandsNum = 0;
 
     void Awake()
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
         commandsManager.AddContext(new BaseContext("ActorsContext"));
+
+        if (camera2D == null)
+        {
+            camera2D = Camera.main.gameObject.GetComponent<JumpCamera2D>();
+            if (camera2D == null)
+            {
+                Debug.LogError("There is no JumpCamera in the scene");
+            }
+        }
     }
 
     private IEnumerator Start()
@@ -136,6 +147,7 @@ public class GameManager : Singleton<GameManager>
 
         possessionHistory.Add(actor);
         GetPossessedActor().transform.localPosition = new Vector3(possessedActor.transform.localPosition.x, possessedActor.transform.localPosition.y, -1);
+        camera2D.SetNewTarget(GetPossessedActor().gameObject);
     }
 
     public Actor GetPossessedActor()
