@@ -156,4 +156,34 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log("Level complete!");
     }
+
+    public void ResetGame()
+    {
+        var act = possessionHistory[0];
+        possessionHistory = new List<Actor>();
+        possessionHistory.Add(act);
+
+        commandsManager.Clear();
+
+        var allActors = GetComponentsInChildren<Actor>();
+        var allInteractiables = GetComponentsInChildren<InteractableObject>();
+
+        for(int i = 0; i < allActors.Length; i++)
+        {
+            UregisterActor(allActors[i]);
+            allActors[i].ResetActor();
+        }
+
+        for (int i = 0; i < allInteractiables.Length; i++)
+        {
+            UnregisterInteractable(allInteractiables[i]);
+            allInteractiables[i].ResetInteractiable();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            ResetGame();
+    }
 }

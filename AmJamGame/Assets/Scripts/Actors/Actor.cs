@@ -14,11 +14,12 @@ public abstract class Actor : MonoBehaviour
     public string[] interactables = new string[] { };
 
     public int movementStep = 1;
-
+    public Vector3 initialPosition;
     protected int tileSize = 1;
 
     private void Awake()
     {
+        initialPosition = transform.localPosition;
         GameManager.Instance.RegisterActor(this);
     }
 
@@ -94,7 +95,9 @@ public abstract class Actor : MonoBehaviour
     {
         GameManager.Instance.UregisterActor(this);
         GameManager.Instance.BackHistory();
-        gameObject.SetActive(false);
+        var renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rendr in renderers)
+            rendr.enabled = false;
     }
 
     public virtual string ValidatePosition(int x, int y)
@@ -114,5 +117,15 @@ public abstract class Actor : MonoBehaviour
         }
 
         return string.Empty;
+    }
+
+    public void ResetActor()
+    {
+        var renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rendr in renderers)
+            rendr.enabled = true;
+
+        transform.localPosition = initialPosition;
+        GameManager.Instance.RegisterActor(this); 
     }
 }
