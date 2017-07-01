@@ -10,9 +10,9 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
     Actor actor;
     List<string> commandsList = new List<string>()
         {
-            "move",
-            "interact",
-            "possess"
+            "mov",
+            "use",
+            "pos"
         };
     // Use this for initialization
     void Start()
