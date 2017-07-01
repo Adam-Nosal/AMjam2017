@@ -27,7 +27,7 @@ public class AudioLibrary : ScriptableObject
         Possess=13
     }
 
-
+    [Header("Effects AudioClips")]
     public List<AudioClip> KeyboardTypesEffectsClips;
     public List<AudioClip> KeyboardEnterEffectsClips;
     public List<AudioClip> RunProgramEffectsClips;
@@ -43,19 +43,34 @@ public class AudioLibrary : ScriptableObject
     public List<AudioClip> SuccessEffectsClips;
     public List<AudioClip> PossessEffectsClips;
 
+    [Header("Effects Volume")]
+    [Range(50.0f,200.0f)]
     public float KeyboardTypesEffectsClipsVolume = 150.0f;
+    [Range(50.0f, 200.0f)]
     public float KeyboardEnterEffectsClipsVolume = 150.0f;
+    [Range(50.0f, 200.0f)]
     public float RunProgramEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float StepHumanEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float StepFrogEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float StepBalonEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float StepKeyEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float TeleportEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float DeathEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float BlockEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float ErrorEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float FailEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float SuccessEffectsClipsVolume = 100.0f;
+    [Range(50.0f, 200.0f)]
     public float PossessEffectsClipsVolume = 100.0f;
 
     public AudioClip[] ambientClips;

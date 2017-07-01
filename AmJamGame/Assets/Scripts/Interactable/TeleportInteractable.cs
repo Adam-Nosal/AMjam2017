@@ -8,6 +8,7 @@ public class TeleportInteractable : InteractableObject
 
     public override void Interact(Actor actor)
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Teleport);
         base.Interact(actor);
 
         actor.transform.localPosition = new Vector3(teleportTarget.localPosition.x, teleportTarget.localPosition.y, actor.transform.localPosition.z);

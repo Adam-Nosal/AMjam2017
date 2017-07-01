@@ -211,7 +211,7 @@ Console2.Instance.AddFeedback(-1, textsb[Random.Range(0, textsb.Length)], "green
     public void Failed()
     {
         WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Fail);
-
+        WorldManager.Instance.ScreenShake();
         Debug.Log("Failed");
     }
 
