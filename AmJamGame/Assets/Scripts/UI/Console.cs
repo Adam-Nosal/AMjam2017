@@ -22,7 +22,10 @@ public class Console : Singleton<Console> {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(ConsoleInput.selectionFocusPosition);  
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            Debug.Log("enter");
+        }       
     }
 
     public void InputEntered()
@@ -51,9 +54,6 @@ public class Console : Singleton<Console> {
 
     public void AddFeedback(int line, string feedback)
     {
-      //  if(CurrentRunLines==null)
-      //      Console2.In
-
         //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         CurrentRunLines[previousLinesCount + line] += " <color=red>" + feedback + "</color>";
         ConsoleOutputText.text = "";
