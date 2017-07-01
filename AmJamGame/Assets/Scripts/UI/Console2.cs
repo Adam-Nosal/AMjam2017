@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class Console2 : Singleton<Console2> {
+
+    public InputField ConsoleInput;
+    public Text ConsoleOutputText;
+
+    private List<string> CurrentRunLines = new List<string>();
+    private int previousLinesCount = 0;
+
+    // Use this for initialization
+    void Start () {
+       // ConsoleInput.OnSubmit += InputEntered;
+
+    }
+	
+	// Update is called once per frame
+	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            Debug.Log("enter");
+        }       
+    }
+
+    public void InputEntered()
+    {
+      //  EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
+     //   ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
+
+
+        //Debug.Log(ConsoleInput.text);
+        //CurrentRunLines.Add(ConsoleInput.text);
+        //ConsoleOutputText.text += "\n" + ConsoleInput.text;
+        //CommandInterpreter.Instance.usedCommandsList.Add(ConsoleInput.text);
+       // ConsoleInput.text = "";
+    }
+
+    public void RunButtonClicked()
+    {
+        //  CurrentRunLines.Clear();
+        string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (var ln in lines)
+        {
+            CurrentRunLines.Add(ln);
+            CommandInterpreter.Instance.usedCommandsList.Add(ln);
+        }
+        CommandInterpreter.Instance.InterpretCommands();
+
+        CommandInterpreter.Instance.usedCommandsList.Clear();
+
+        // ConsoleOutputText.text += "\n<color=yellow>RUN</color>";
+        // CurrentRunLines.Add("\n<color=yellow>RUN</color>");
+        previousLinesCount += CurrentRunLines.Count - previousLinesCount;
+
+    }
+
+    public void AddFeedback(int line, string feedback)
+    {
+        //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        CurrentRunLines[previousLinesCount + line] += " <color=red>" + feedback + "</color>";
+        ConsoleOutputText.text = "";
+        foreach (var ln in CurrentRunLines)
+            ConsoleOutputText.text += "\n" + ln;
+    }
+}

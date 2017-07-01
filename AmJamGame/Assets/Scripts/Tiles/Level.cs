@@ -9,7 +9,7 @@ public class Level : Singleton<Level>
 
     private void Start()
     {
-        LoadLevelById(0);SpawnEnemies();
+     //   LoadLevelById(0);SpawnEnemies();
     }
 
     public void LoadLevelById(int i) 
