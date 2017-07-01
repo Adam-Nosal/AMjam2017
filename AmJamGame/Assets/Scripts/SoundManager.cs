@@ -9,8 +9,10 @@ public class SoundManager : Singleton<SoundManager> {
     AudioSource ambientAudioSource;
     [SerializeField]
     float ambientVolume = 100.0f;
-    //[SerializeField]
-    //AudioSource effectsAudioSource;
+    [SerializeField]
+    AudioSource effectsAudioSource;
+    [SerializeField]
+    float effectsVolume = 100.0f;
 
     AudioLibrary audioLibrary;
 
@@ -18,10 +20,20 @@ public class SoundManager : Singleton<SoundManager> {
 	void Awake () {
         DontDestroyOnLoad(this.gameObject);
         audioLibrary = WorldManager.Instance.GetAudioLibrary();
-        ambientAudioSource = this.gameObject.AddComponent<AudioSource>();
-        ambientAudioSource.clip = audioLibrary.GetAmbientClip();
-        ambientAudioSource.volume = ambientVolume;
-        ambientAudioSource.loop = true;
+        if (ambientAudioSource == null)
+        {
+            ambientAudioSource = this.gameObject.AddComponent<AudioSource>();
+            ambientAudioSource.clip = audioLibrary.GetAmbientClip();
+            ambientAudioSource.volume = ambientVolume;
+            ambientAudioSource.loop = true;
+        }
+        if (effectsAudioSource == null)
+        {
+            effectsAudioSource = this.gameObject.AddComponent<AudioSource>();
+            effectsAudioSource.clip = audioLibrary.GetAmbientClip();
+            effectsAudioSource.loop = false;
+            effectsAudioSource.volume = effectsVolume;
+        }
     }
 
     [ContextMenu("PlayAmbient")]
@@ -29,6 +41,13 @@ public class SoundManager : Singleton<SoundManager> {
     {
 
         ambientAudioSource.Play();
+    }
+
+    public void PlayEffect( AudioLibrary.soundEffects origin)
+    {
+        effectsAudioSource.clip = audioLibrary.GetAudioClip(origin);
+   
+        effectsAudioSource.Play();
     }
     
     
