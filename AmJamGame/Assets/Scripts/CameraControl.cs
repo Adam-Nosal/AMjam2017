@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour 
 {
+    public delegate void ShakeDone();
+    private ShakeDone mShakeDone;
+
     public float MoveSpeed = 10f; // How quickly the camera should move from point A to B.
     public float SnapDistance = 10.00f; // How far from the new position we should be before snapping to it.
     public Transform MainAxis; // Axis that moves the camera
@@ -68,6 +71,8 @@ public class CameraControl : MonoBehaviour
                 if (_shakeCount <= 0)
                 {
                     _isShaking = false;
+                    if(mShakeDone!=null)
+                    mShakeDone();
                     ShakeAxis.localPosition = new Vector3(_baseX, _baseY, ShakeAxis.localPosition.z);
                     if (!IsMoving) enabled = false;
                 }
@@ -102,6 +107,12 @@ public class CameraControl : MonoBehaviour
         _newPosition = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
         IsMoving = true;
         enabled = true;
+    }
+
+    public void RegisterShakeDone(ShakeDone callback)
+    {
+        mShakeDone -= callback;
+        mShakeDone += callback;
     }
 
 

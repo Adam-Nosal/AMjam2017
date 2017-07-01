@@ -62,7 +62,7 @@ public class MoveCommand : ActorCommand
                 yield break;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
         ExecutionProgress = EExecutionProgress.SUCCESS;
         Abort();
