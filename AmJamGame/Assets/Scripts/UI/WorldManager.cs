@@ -14,6 +14,7 @@ public class WorldManager : Singleton<WorldManager>
 
     public SoundManager soundManager;
     public CameraControl cameraControl;
+    public JumpCamera2D jumpCamera;
 
     private int currentLevel = 0;                                  //Current level number
     
@@ -61,7 +62,15 @@ public class WorldManager : Singleton<WorldManager>
         if(cameraControl == null)
         {
             cameraControl = Camera.main.GetComponent<CameraControl>();
+            cameraControl.RegisterShakeDone(ShakeDoneStabilize);
         }
+    }
+
+    void ShakeDoneStabilize()
+    {
+        InitJumpCamera();
+        jumpCamera.enabled = true;
+        cameraControl.enabled = false;
     }
 
     //Initializes the game for each level.
@@ -69,6 +78,16 @@ public class WorldManager : Singleton<WorldManager>
     {
         InitLevelHolder();
         levelHolder.LoadLevel(currentLevel);
+
+    }
+
+    public void InitJumpCamera()
+    {
+        if (jumpCamera == null)
+        {
+            jumpCamera = Camera.main.GetComponent<JumpCamera2D>();
+
+        }
 
     }
 
@@ -88,8 +107,25 @@ public class WorldManager : Singleton<WorldManager>
 
     public void ScreenShake()
     {
+        InitJumpCamera();
         InitCameraControl();
-        cameraControl.TestShake();
+        if (jumpCamera.enabled != false)
+        {
+            jumpCamera.enabled = false;
+            cameraControl.enabled = true;
+            StartCoroutine(ShakeCoroutine());
+        }
+    }
+
+    private IEnumerator ShakeCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+    
+            cameraControl.TestShake();
+        
     }
 }
 
