@@ -21,9 +21,15 @@ public class PossessCommand : ActorCommand
         ExecutionResult = actor.PossessOverlappedActor();
 
         if (string.IsNullOrEmpty(ExecutionResult))
+        {
+            GameManager.Instance.GetPossessedActor().PrintPossess();
             ExecutionProgress = EExecutionProgress.SUCCESS;
+        }
         else
+        {
+            Console2.Instance.AddFeedback(lineNumber, "Here is nothing I can possess...", "red");
             ExecutionProgress = EExecutionProgress.FAILED;
+        }            
 
         Abort();
         yield return new WaitForSeconds(1f);

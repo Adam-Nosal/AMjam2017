@@ -197,6 +197,7 @@ public class GameManager : Singleton<GameManager>
     public void CompleteLevel()
     {
         Debug.Log("Level complete!");
+        WorldManager.Instance.LoadNextLevel();
     }
     public void Failed()
     {
