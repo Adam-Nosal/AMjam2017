@@ -15,6 +15,14 @@ public class GameManager : Singleton<GameManager>
 
     public JumpCamera2D camera2D;
 
+    private string[] textsb = new string[]
+    {
+        "There, was that so hard?",
+        "Awesome, I made it! Erm, I mean, we made it.",
+        "Treasure collected! You helped some, thanks.",
+        "I made it, and it was all on your own!"
+    };
+
     private int commandsNum = 0;
     
     void Awake()
@@ -196,8 +204,7 @@ public class GameManager : Singleton<GameManager>
 
     public void CompleteLevel()
     {
-        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Success);
-        Debug.Log("Level complete!");
+Console2.Instance.AddFeedback(-1, textsb[Random.Range(0, textsb.Length)], "green"); WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Success);        Debug.Log("Level complete!");
         WorldManager.Instance.LoadNextLevel();
 
     }

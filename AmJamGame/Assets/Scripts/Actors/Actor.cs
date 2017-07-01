@@ -13,6 +13,8 @@ public abstract class Actor : MonoBehaviour
     [TagSelector]
     public string[] interactables = new string[] { };
 
+    public string[] textsPossess;
+
     public int movementStep = 1;
     public Vector3 initialPosition;
     protected int tileSize = 1;
@@ -85,6 +87,12 @@ public abstract class Actor : MonoBehaviour
         if (!result.Contains("Blocked"))
         {
             transform.localPosition = newPosition;
+
+            if (result.Contains("Win"))
+            {
+                GameManager.Instance.CompleteLevel();
+                return string.Empty;
+            }
         }
 
         return result;
@@ -106,7 +114,11 @@ public abstract class Actor : MonoBehaviour
         if(tile == null)
             return "Killed by void";
 
-        for (int i = 0; i < interactables.Length; i++)
+        if (tile.tag == "LevelFinish")
+            return "Win";
+
+
+            for (int i = 0; i < interactables.Length; i++)
         {
             if (interactables[i] == "Actor")
             {
@@ -144,12 +156,19 @@ public abstract class Actor : MonoBehaviour
     public void SetPossessed(bool possess)
     {
         if (possess)
+        {            
             StartCoroutine("PossessAnim");
+        }            
         else
         {
             StopCoroutine("PossessAnim");
             gameObject.GetComponentInChildren<SpriteRenderer>().material.SetFloat("_InvertColors", 0f);
         }
+    }
+
+    public void PrintPossess()
+    {
+        Console2.Instance.AddFeedback(-1, textsPossess[Random.Range(0, textsPossess.Length)], "white");
     }
 
     public IEnumerator PossessAnim()
