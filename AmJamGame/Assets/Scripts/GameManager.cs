@@ -25,20 +25,20 @@ public class GameManager : Singleton<GameManager>
 
         yield return new WaitForSeconds(3f);
 
-        var l = new List<ActorCommand>();
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 2));
-        l.Add(new PossessCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
-        l.Add(new InteractCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 3));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.left, 5));
-        l.Add(new PossessCommand(GetPossessedActor(), 0));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
-        l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //var l = new List<ActorCommand>();
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 2));
+        //l.Add(new PossessCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
+        //l.Add(new InteractCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 3));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.left, 5));
+        //l.Add(new PossessCommand(GetPossessedActor(), 0));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.up, 1));
+        //l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
 
-        ExecuteCommands(l);
+        //ExecuteCommands(l);
     }
 
     public void ExecuteCommands(List<ActorCommand> commands)
