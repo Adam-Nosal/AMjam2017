@@ -122,11 +122,11 @@ public class Console2 : Singleton<Console2> {
 
 
 
-        foreach (var ln in lines)
+        for (int i=0;i< lines.Length;i++)
         {
             if (sthChangedInInput)
-                CurrentRunLines.Add(new LineWithFeedback() { code = ln });
-            CommandInterpreter.Instance.usedCommandsList.Add(ln);
+                CurrentRunLines.Add(new LineWithFeedback() { code = lines[i] });
+            CommandInterpreter.Instance.usedCommandsList.Add(CurrentRunLines[i].code);
         }
         sthChangedInInput = false;
 
