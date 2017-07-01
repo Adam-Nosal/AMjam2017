@@ -139,8 +139,10 @@ public class Console2 : Singleton<Console2> {
 
     }
 
-    public void AddFeedback(int line, string feedback)
+    public void AddFeedback(int line, string feedback, string color="red")
     {
+        var colorKey = string.Format("<color={0}>", color);
+
         //string[] lines = ConsoleOutputText.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         // CurrentRunLines[line].feedback = "";
         CurrentRunLines[line].feedback = feedback;// " <color=red>" + feedback + "</color>";
@@ -148,13 +150,13 @@ public class Console2 : Singleton<Console2> {
         ConsoleInput.text = "";
         for (int i = 0; i < CurrentRunLines.Count; i++)
             if (i == line)
-                ConsoleInput.text += (i == 0 ? "" : "\n") + "<color=red>" + CurrentRunLines[i].code + "</color>";
+                ConsoleInput.text += (i == 0 ? "" : "\n") + colorKey + CurrentRunLines[i].code + "</color>";
             else
                 ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code;
 
         if (!string.IsNullOrEmpty(DebugOutput.text))
-            DebugOutput.text = "\n" + DebugOutput.text;
+            DebugOutput.text = "\n" + DebugOutput.text;        
 
-        DebugOutput.GetComponent<TextTyper>().AppendText(feedback, "<color=red>{0}</color>");
+        DebugOutput.GetComponent<TextTyper>().AppendText(feedback, colorKey + "{0}</color>");
     }
 }
