@@ -72,12 +72,13 @@ public class MenuManager : Singleton<MenuManager>
     }
 
 
-    private string Credits = " GameDesign:" + Environment.NewLine + 
-        " Michał Sapiński " + Environment.NewLine + Environment.NewLine + 
-        "Programming:" + Environment.NewLine + 
-        " Agata Chmiel " + Environment.NewLine +
-        " Łukasz Górny " + Environment.NewLine + 
-        " Adam Nosal " + Environment.NewLine +  Environment.NewLine +
-        " SoundDesign: " + Environment.NewLine + 
-        " Agnieszka Rumińska";
+    private string Credits = 
+        "GAME DESIGN:" + Environment.NewLine +
+        " <color=blue>Michał Sapiński</color>" + Environment.NewLine + Environment.NewLine +
+        "PROGRAMMING:" + Environment.NewLine +
+        " <color=#FF54DCFF>Agata Chmiel " + Environment.NewLine +
+        " Łukasz Górny " + Environment.NewLine +
+        " Adam Nosal</color>" + Environment.NewLine +  Environment.NewLine +
+        "SOUND DESIGN: " + Environment.NewLine +
+        " <color=cyan>Agnieszka Rumińska</color>";
 }
