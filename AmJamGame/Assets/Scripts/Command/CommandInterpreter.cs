@@ -67,7 +67,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
 
             switch (commandName)
             {
-                case "move":
+                case "mov":
                     {
                         int bracket = usedCommandsList[i].IndexOf('(');
                         int comma = usedCommandsList[i].IndexOf(',');
@@ -103,13 +103,13 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         commands.Add(move);
                         break;
                     }
-                case "interact":
+                case "use":
                     {
                         InteractCommand move = new InteractCommand(actor, i);
                         commands.Add(move);
                         break;
                     }
-                case "possess":
+                case "pos":
                     {
                         PossessCommand move = new PossessCommand(actor, i);
                         commands.Add(move);
