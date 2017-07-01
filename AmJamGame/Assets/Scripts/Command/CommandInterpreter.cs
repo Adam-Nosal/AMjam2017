@@ -69,7 +69,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                             return;    
 
                         //tmp
-                        MoveCommand move = new MoveCommand(null, i, "f", iterations);
+                        MoveCommand move = new MoveCommand(null, i, dir, iterations);
                         commands.Add(move);
                         break;
                     }
