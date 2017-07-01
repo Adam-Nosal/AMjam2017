@@ -9,6 +9,7 @@ public class IntroTexts : MonoBehaviour
 
     public UnityEngine.UI.Text instruction;
     public UnityEngine.UI.InputField inputField;
+    public GameObject ButtonRun;
     public TextTyper typer;
 
     private int currentLine;
@@ -18,6 +19,9 @@ public class IntroTexts : MonoBehaviour
     {
         inputField.interactable = false;
         instruction.enabled = false;
+        ButtonRun.SetActive(false);
+
+        typer.OnComplete += Typer_OnComplete;
 
         yield return new WaitForSeconds(1f);
         StartCoroutine(PrintLine(0f));
@@ -32,13 +36,12 @@ public class IntroTexts : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         typer.AppendText(lines[currentLine], "{0}");
-        typer.OnComplete += Typer_OnComplete;
     }
 
     private void Typer_OnComplete()
     {        
         currentLine++;
-        inputField.text += "\n";
+        inputField.text += "\n\n";
 
         if (lines.Length > currentLine)
         {
@@ -55,6 +58,7 @@ public class IntroTexts : MonoBehaviour
         inputField.text = "";
         inputField.interactable = true;
         instruction.enabled = true;
+        ButtonRun.SetActive(true);
         inputField.Select();
     }
 
