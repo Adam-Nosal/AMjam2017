@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MoveCommand : ActorCommand
 {
-    private string direction;
+    private directionType direction;
     private int iterations;
 
-    public MoveCommand(Actor actor,int lineNumber, string direction, int iterations)
+    public MoveCommand(Actor actor,int lineNumber, directionType direction, int iterations)
             : base("MoveCommand", actor, lineNumber)
     {
         this.direction = direction;
