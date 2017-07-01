@@ -7,6 +7,7 @@ public class KeyActor : Actor
 {
     public override string Move(directionType direction)
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.StepKey);
         var interactable = GameManager.Instance.GetInteractableAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y);
 
         if (interactable != null && interactable.tag == "DoorClosed")
