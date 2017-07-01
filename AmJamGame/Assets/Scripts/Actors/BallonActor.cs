@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class BallonActor : Actor
 {
-    public override string MakeInteraction()
-    {
-        throw new NotImplementedException();
-    }
-
     public override string Move(directionType direction)
     {
         string result = string.Empty;
@@ -20,10 +15,5 @@ public class BallonActor : Actor
         }
 
         return result;
-    }
-
-    public override string PossessOverlappedActor()
-    {
-        throw new NotImplementedException();
     }
 }

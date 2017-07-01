@@ -10,6 +10,9 @@ public abstract class Actor : MonoBehaviour
     [TagSelector]
     public string[] hazards = new string[] { };
 
+    [TagSelector]
+    public string[] interactables = new string[] { };
+
     public int movementStep = 1;
 
     protected int tileSize = 1;
@@ -24,9 +27,38 @@ public abstract class Actor : MonoBehaviour
         GameManager.Instance.UregisterActor(this);
     }
 
-    public abstract string PossessOverlappedActor();
+    public virtual string MakeInteraction()
+    {
+        var interactable = GameManager.Instance.GetInteractableAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y);
 
-    public abstract string MakeInteraction();
+        if(interactable == null)
+            return "No actor to interact!";
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            if (interactable.tag == interactables[i])
+            {
+                interactable.Interact(this);
+                return string.Empty;
+            }                
+        }
+
+        return "Cannot interact with: " + interactable.tag;
+    }
+
+    public virtual string PossessOverlappedActor()
+    {
+        var actor = GameManager.Instance.GetActorAtPosition((int)transform.localPosition.x, (int)transform.localPosition.y, this);
+
+        if(actor == null)
+        {
+            return "No actor to possess!";
+        }
+
+        GameManager.Instance.UpdatedPossessedActor(actor);
+
+        return string.Empty;
+    }
 
     public virtual string Move(directionType direction)
     {
@@ -56,6 +88,13 @@ public abstract class Actor : MonoBehaviour
         }
 
         return result;
+    }
+
+    public virtual void Kill()
+    {
+        GameManager.Instance.UregisterActor(this);
+        GameManager.Instance.BackHistory();
+        gameObject.SetActive(false);
     }
 
     public virtual string ValidatePosition(int x, int y)

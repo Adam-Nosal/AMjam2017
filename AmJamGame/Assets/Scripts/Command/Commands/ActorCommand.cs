@@ -28,7 +28,15 @@ public class ActorCommand : BaseCommand
 
     public override void Execute()
     {
+        actor = GameManager.Instance.GetPossessedActor();
+
         ExecutionProgress = EExecutionProgress.INPROGRESS;
         base.Execute();
+    }
+
+    public override void Abort()
+    {
+        Debug.Log(string.Format("Command {0} complete with result: {1}: {2}", Name, ExecutionProgress, ExecutionResult));
+        base.Abort();
     }
 }

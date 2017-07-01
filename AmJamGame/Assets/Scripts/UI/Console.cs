@@ -30,8 +30,8 @@ public class Console : Singleton<Console> {
 
     public void InputEntered()
     {
-        EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
-        ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
+        //EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
+       // ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
 
         Debug.Log(ConsoleInput.text);
         CurrentRunLines.Add(ConsoleInput.text);
