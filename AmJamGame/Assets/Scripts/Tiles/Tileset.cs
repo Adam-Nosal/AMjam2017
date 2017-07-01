@@ -1,6 +1,8 @@
 ﻿using System.Linq;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class Tileset : Singleton<Tileset>
@@ -23,7 +25,8 @@ public class Tileset : Singleton<Tileset>
 
 
     // Toolset 
-      [ContextMenu("TilesetTools/CreatePrefabsFromTilemap")]
+#if UNITY_EDITOR
+    [ContextMenu("TilesetTools/CreatePrefabsFromTilemap")]
     public void GenerateTilePrefabs()
     {
         string spriteSheet = AssetDatabase.GetAssetPath(TileMap);
@@ -47,5 +50,7 @@ public class Tileset : Singleton<Tileset>
 
     [HideInInspector] public  Texture TileMap;
     [HideInInspector] public string PrefabsPath;
+
+#endif
 }
 
