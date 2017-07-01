@@ -12,6 +12,16 @@ public class DoorInteractable : InteractableObject
 
         GameManager.Instance.UnregisterInteractable(this);
 
-        gameObject.SetActive(false);
+        var renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rendr in renderers)
+            rendr.enabled = false;
+    }
+
+    public override void ResetInteractiable()
+    {
+        base.ResetInteractiable();
+        var renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rendr in renderers)
+            rendr.enabled = true;
     }
 }
