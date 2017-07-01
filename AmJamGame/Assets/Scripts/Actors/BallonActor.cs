@@ -10,9 +10,16 @@ public class BallonActor : Actor
         throw new NotImplementedException();
     }
 
-    public override string Move(string direction)
+    public override string Move(directionType direction)
     {
-        throw new NotImplementedException();
+        string result = string.Empty;
+
+        while(result == string.Empty)
+        {
+            result = base.Move(direction);
+        }
+
+        return result;
     }
 
     public override string PossessOverlappedActor()
