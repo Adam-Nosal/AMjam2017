@@ -15007,8 +15007,10 @@ Prefab:
     - target: {fileID: 114844732711403312, guid: c44f73cb779ab07479ad121c2ff196e1,
         type: 2}
       propertyPath: m_Text
-      value: "Documentation:\nmov(x,y) - Move character in direction x , y times \nuse()
-        - Use the item\npos() - Possess the character"
+      value: 'Revision: 0
+
+
+        Lines: 0'
       objectReference: {fileID: 0}
     - target: {fileID: 1367539479541538, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
       propertyPath: m_IsActive
