@@ -146,6 +146,9 @@ public class GameManager : Singleton<GameManager>
     {
         if(possessionHistory.Count > 0)
             possessionHistory.RemoveAt(possessionHistory.Count - 1);
+
+        GetPossessedActor().SetPossessed(true);
+        camera2D.SetNewTarget(GetPossessedActor().gameObject);
     }
 
     public void UpdatedPossessedActor(Actor actor)

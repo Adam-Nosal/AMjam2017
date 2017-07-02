@@ -14,9 +14,12 @@ public class DoorInteractable : InteractableObject
     private const string closedTag = "DoorClosed";
     private const string openTag = "DoorOpen";
 
+    private bool isOpenStart;
+
 
     public void Start()
     {
+        isOpenStart = isOpen;
         SetState(isOpen);
     }
 
@@ -27,8 +30,7 @@ public class DoorInteractable : InteractableObject
         actor.Kill();
 
         GameManager.Instance.UnregisterInteractable(this);
-        ChangeState();
-        gameObject.tag = "DoorOpen";
+        ChangeState();        
         //var renderers = gameObject.GetComponentsInChildren<Renderer>();
         //foreach (var rendr in renderers)
         //    rendr.enabled = false;
@@ -40,13 +42,17 @@ public class DoorInteractable : InteractableObject
         var renderers = gameObject.GetComponentsInChildren<Renderer>();
         foreach (var rendr in renderers)
             rendr.enabled = true;
+
+        isOpen = isOpenStart;
+        gameObject.tag = isOpen ? openTag : closedTag; ;
+        SetState(isOpen);
     }
     [ContextMenu("Change State")]
     public void ChangeState()
     {
         isOpen = !isOpen;
         SetState(isOpen);
-        this.tag = isOpen ? openTag : closedTag;
+        gameObject.tag = isOpen ? openTag : closedTag;
     }
 
     private void SetState(bool origin)

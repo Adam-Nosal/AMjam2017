@@ -23,7 +23,10 @@ private IEnumerator ExecuteDelayed()
         if (string.IsNullOrEmpty(ExecutionResult))
             ExecutionProgress = EExecutionProgress.SUCCESS;
         else
+        {
+            Console2.Instance.AddFeedback(lineNumber, "There's nothing to use here...", "red");
             ExecutionProgress = EExecutionProgress.FAILED;
+        }
 
         Abort();
         yield return new WaitForSeconds(1f);
