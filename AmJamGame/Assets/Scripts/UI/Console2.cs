@@ -53,62 +53,16 @@ public class Console2 : Singleton<Console2> {
         {
             UpdateScores();
         }
-
-       //// Debug.Log(ConsoleInput.selectionFocusPosition);
-       // int currentLine = 0;
-       // int charsInLines = 0; 
-       //for(int i=0;i< CurrentRunLines.Count; i++)
-       // {
-       //     charsInLines += (CurrentRunLines[i].code!=null?CurrentRunLines[i].code.Length:0) + (CurrentRunLines[i].feedback != null ? CurrentRunLines[i].feedback.Length : 0);
-       //     if (ConsoleInput.selectionFocusPosition<=charsInLines)
-       //     {
-       //         currentLine = i;
-       //       //  Debug.Log("CURRENT LINE " + currentLine); 
-       //         break;
-       //     }
-       // }
-
-        // if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
-        // {
-        //     string[] lines = ConsoleInput.text.Split('\n');
-        //     // for (int i = 0; i < lines.Length; i++)
-        //     //  {
-        //     if (CurrentRunLines.Count > currentLine && !string.IsNullOrEmpty(CurrentRunLines[currentLine].feedback))
-        //     {
-        //         lines[currentLine] = lines[currentLine].Remove(lines[currentLine].IndexOf(CurrentRunLines[currentLine].feedback), CurrentRunLines[currentLine].feedback.Length);
-        //         CurrentRunLines[currentLine].feedback = "";
-
-        //         ConsoleInput.text = "";
-        //         for (int i = 0; i < CurrentRunLines.Count; i++)
-        //             ConsoleInput.text += (i == 0 ? "" : "\n") + CurrentRunLines[i].code + CurrentRunLines[i].feedback;
-        //     }
-        //     //  }
-        //     // lines[i] = lines[i].Remove(lines[ConsoleInput.selectionFocusPosition].IndexOf(CurrentRunLines[i].feedback), CurrentRunLines[i].feedback.Length);
-        //     Debug.Log(ConsoleInput.selectionFocusPosition);
-        // }
     }
 
     public void InputEntered()
     {
-      //  EventSystem.current.SetSelectedGameObject(ConsoleInput.gameObject, null);
-     //   ConsoleInput.OnPointerClick(new PointerEventData(EventSystem.current));
-
-
-        //Debug.Log(ConsoleInput.text);
-        //CurrentRunLines.Add(ConsoleInput.text);
-        //ConsoleOutputText.text += "\n" + ConsoleInput.text;
-        //CommandInterpreter.Instance.usedCommandsList.Add(ConsoleInput.text);
-       // ConsoleInput.text = "";
     }
 
     public void RunButtonClicked()
     {
-
         GameManager.Instance.executionsCount++;        
-
-        //  CurrentRunLines.Clear();
-        // string[] lines = ConsoleInput.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        //  ClearFeedback();
+       
         WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.RunProgram);
         string[] lines = ConsoleInput.text.Split('\n');
     

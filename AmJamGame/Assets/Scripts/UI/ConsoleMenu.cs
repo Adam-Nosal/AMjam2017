@@ -15,6 +15,7 @@ public class ConsoleMenu : Singleton<ConsoleMenu> {
 
     public InputField ConsoleInput;
     public Text DebugOutput;
+    public Image Logo;
 
     private bool areCredits = false;
     private List<LineWithFeedback> CurrentRunLines = new List<LineWithFeedback>();
@@ -108,6 +109,20 @@ public class ConsoleMenu : Singleton<ConsoleMenu> {
         areCredits = true;
         ClearOutput();
         DebugOutput.text = credits;
+    }
+
+    public void FadeOutLogo()
+    {
+        StartCoroutine(Fade());
+    }
+
+    IEnumerator Fade()
+    {
+        while(Logo.color.a>0)
+        {
+            Logo.color = new Color(Logo.color.r, Logo.color.g, Logo.color.b, Logo.color.a - 0.05f);
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     void ClearFeedback()

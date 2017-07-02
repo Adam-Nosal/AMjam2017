@@ -34,9 +34,7 @@ public class MoveCommand : ActorCommand
     public override void Execute()
     {
         base.Execute();
-
-        coroutine = GameManager.Instance.StartCoroutine(ExecuteDelayed());
-        
+        coroutine = GameManager.Instance.StartCoroutine(ExecuteDelayed());        
     }
 
     private IEnumerator ExecuteDelayed()

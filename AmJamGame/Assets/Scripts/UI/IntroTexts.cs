@@ -100,5 +100,6 @@ public class IntroTexts : MonoBehaviour
         inputField.Select();
 
         WorldManager.Instance.soundManager.StopVoiceover();
+        ConsoleMenu.Instance.FadeOutLogo();
     }
 }
