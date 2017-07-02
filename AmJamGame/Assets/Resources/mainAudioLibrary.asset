@@ -61,7 +61,7 @@ MonoBehaviour:
   PossessEffectsClipsVolume: 0.349
   ambientClips:
   - {fileID: 8300000, guid: 7c96e327dce64ba4eb8da2c30108761d, type: 3}
-  AmbientClipsVolume: 0.502
+  AmbientClipsVolume: 0.2
   voiceOvers:
   - {fileID: 8300000, guid: e8bc372bbec8ffe4b88410c473b28255, type: 3}
   - {fileID: 8300000, guid: 7e14da099e73c0044bcfac658426c953, type: 3}
