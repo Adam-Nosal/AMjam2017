@@ -30,6 +30,13 @@ public class IntroTexts : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            StopCoroutine("PrintLine");
+            currentLine = 500;
+            typer.Skip();
+            StartCoroutine(RemoveIntro());
+        }
 	}
 
     private IEnumerator PrintLine(float time)

@@ -16,6 +16,7 @@ public class ConsoleMenu : Singleton<ConsoleMenu> {
     public InputField ConsoleInput;
     public Text DebugOutput;
 
+    private bool areCredits = false;
     private List<LineWithFeedback> CurrentRunLines = new List<LineWithFeedback>();
     private int previousLinesCount = 0;
 
@@ -79,7 +80,8 @@ public class ConsoleMenu : Singleton<ConsoleMenu> {
 
     public void AddFeedback(int line, string feedback)
     {
- 
+        if (areCredits)
+            StartCoroutine(ClearOutput());
         CurrentRunLines[line].feedback = feedback;// " <color=red>" + feedback + "</color>";
          ConsoleInput.text = "";
         for (int i = 0; i < CurrentRunLines.Count; i++)
@@ -90,6 +92,22 @@ public class ConsoleMenu : Singleton<ConsoleMenu> {
 
         DebugOutput.text = "<color=red>" + feedback + "</color>\n" + DebugOutput.text;
         
+    }
+
+    public IEnumerator ClearOutput()
+    {
+        yield return new WaitForEndOfFrame();
+        areCredits = false;
+        DebugOutput.text = string.Empty;
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    public void PrintCredits(string credits)
+    {
+        areCredits = true;
+        ClearOutput();
+        DebugOutput.text = credits;
     }
 
     void ClearFeedback()

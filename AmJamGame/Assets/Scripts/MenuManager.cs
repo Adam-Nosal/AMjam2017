@@ -9,6 +9,8 @@ public class MenuManager : Singleton<MenuManager>
     public CommandsManager commandsManager;
     public bool isCodeRunning = false;
     public Text outputText;
+
+    public ConsoleMenu cMenu;
     
     private int commandsNum = 0;
 
@@ -16,7 +18,7 @@ public class MenuManager : Singleton<MenuManager>
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
         commandsManager.AddContext(new BaseContext("ActorsContext"));
-        
+        cMenu = ConsoleMenu.Instance;
     }
 
     private IEnumerator Start()
@@ -68,7 +70,7 @@ public class MenuManager : Singleton<MenuManager>
 
     public void PrintCredits()
     {
-        outputText.text = Credits;
+        cMenu.PrintCredits(Credits); ;
     }
 
 

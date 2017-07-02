@@ -38,6 +38,11 @@ public class TextTyper : MonoBehaviour
         if (!isCorutineRunning)
             StartCoroutine(TypeText());
     }
+
+    public void Skip()
+    {
+        OnComplete();
+    }
 	
     public IEnumerator TypeText()
     {

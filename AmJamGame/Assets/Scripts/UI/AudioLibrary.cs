@@ -26,6 +26,22 @@ public class AudioLibrary : ScriptableObject
         Possess=13
     }
 
+    public enum VoiceOverEffects
+    {
+        Intro =0,
+        Bug =1,
+        Death =2,
+        Possess=3,
+        Smiley = 4,
+        Frog =5,
+        Balloon=6,
+        Key =7,
+        CollectWin = 8,
+        SyntaxError=9
+    }
+
+
+
     [Header("Effects AudioClips")]
     public List<AudioClip> KeyboardTypesEffectsClips;
     public List<AudioClip> KeyboardEnterEffectsClips;
@@ -78,6 +94,24 @@ public class AudioLibrary : ScriptableObject
     public float AmbientClipsVolume = 0.5f;
     //public List<AudioClip> soundEffectsClips;
 
+
+    [Header("VoiceOvers")]
+    public List<AudioClip> voiceOvers;
+    [Range(0.0f, 1.0f)]
+    public float VoiceOversVolume = 0.85f;
+
+    [Header("VoiceOvers AudioClips")]
+    public List<AudioClip> IntroVoiceOverEffectsClips;
+    public List<AudioClip> BugVoiceOverEffectsClips;
+    public List<AudioClip> DeathVoiceOverEffectsClips;
+    public List<AudioClip> PossessVoiceOverEffectsClips;
+    public List<AudioClip> SmileyVoiceOverEffectsClips;
+    public List<AudioClip> FrogVoiceOverEffectsClips;
+    public List<AudioClip> BalloonVoiceOverEffectsClips;
+    public List<AudioClip> KeyVoiceOverEffectsClips;
+    public List<AudioClip> CollectWinVoiceOverEffectsClips;
+    public List<AudioClip> SyntaxErrorVoiceOverEffectsClips;
+
     public AudioClip GetAudioClip(soundEffects origin)
     {
         List<AudioClip> list = GetAudioList(origin);
@@ -92,9 +126,28 @@ public class AudioLibrary : ScriptableObject
         }
     }
 
+    public AudioClip GetVoiceOverClip(VoiceOverEffects origin)
+    {
+        List<AudioClip> list = GetVoiceOverList(origin);
+        int randRange = list.Count;
+        if (randRange > 1)
+        {
+            return list[UnityEngine.Random.Range(0, randRange)];
+        }
+        else
+        {
+            return list[0];
+        }
+    }
+
     public AudioClip GetAmbientClip(int id = 0)
     {
         return ambientClips[id];
+    }
+
+    public AudioClip GetVoiceOverClip(int id = 0)
+    {
+        return voiceOvers[id];
     }
 
     public List<AudioClip> GetAudioList(soundEffects origin)
@@ -131,6 +184,34 @@ public class AudioLibrary : ScriptableObject
                 return TeleportEffectsClips;
             default:
                 return KeyboardTypesEffectsClips;
+        }
+    }
+
+    public List<AudioClip> GetVoiceOverList(VoiceOverEffects origin)
+    {
+        switch (origin)
+        {
+            case VoiceOverEffects.Balloon:
+                return BalloonVoiceOverEffectsClips;
+            case VoiceOverEffects.Bug:
+                return BugVoiceOverEffectsClips;
+            case VoiceOverEffects.CollectWin:
+                return CollectWinVoiceOverEffectsClips;
+            case VoiceOverEffects.Death:
+                return DeathEffectsClips;
+            case VoiceOverEffects.Frog:
+                return FrogVoiceOverEffectsClips;
+            case VoiceOverEffects.Intro:
+                return IntroVoiceOverEffectsClips;
+            case VoiceOverEffects.Key:
+                return KeyVoiceOverEffectsClips;
+            case VoiceOverEffects.Possess:
+                return PossessVoiceOverEffectsClips;
+            case VoiceOverEffects.Smiley:
+                return SmileyVoiceOverEffectsClips;
+            case VoiceOverEffects.SyntaxError:
+                return SyntaxErrorVoiceOverEffectsClips;
+                default: return BugVoiceOverEffectsClips;
         }
     }
 

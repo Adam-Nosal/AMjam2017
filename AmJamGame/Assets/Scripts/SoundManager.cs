@@ -7,12 +7,14 @@ public class SoundManager : Singleton<SoundManager> {
 
     [SerializeField]
     AudioSource ambientAudioSource;
-    [SerializeField]
-    float ambientVolume = 100.0f;
+
     [SerializeField]
     AudioSource effectsAudioSource;
+
+
     [SerializeField]
-    float effectsVolume = 100.0f;
+    AudioSource voiceOverAudioSource;
+
 
     AudioLibrary audioLibrary;
 
@@ -32,7 +34,12 @@ public class SoundManager : Singleton<SoundManager> {
             effectsAudioSource = this.gameObject.AddComponent<AudioSource>();
             effectsAudioSource.clip = audioLibrary.GetAmbientClip();
             effectsAudioSource.loop = false;
-            effectsAudioSource.volume = effectsVolume;
+        }
+        if (voiceOverAudioSource == null)
+        {
+            voiceOverAudioSource = this.gameObject.AddComponent<AudioSource>();
+            voiceOverAudioSource.clip = audioLibrary.GetVoiceOverClip(0);
+            voiceOverAudioSource.loop = false;
         }
     }
 
@@ -53,6 +60,27 @@ public class SoundManager : Singleton<SoundManager> {
         }
     }
 
+    public void PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(origin);
+        if (clip != null)
+        {
+            effectsAudioSource.clip = clip;
+            effectsAudioSource.volume = audioLibrary.VoiceOversVolume;
+            effectsAudioSource.Play();
+        }
+    }
+
+    public void PlayVoiceOver(int index)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(index);
+        if (clip != null)
+        {
+            voiceOverAudioSource.clip = clip;
+            voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
+            voiceOverAudioSource.Play();
+        }
+    }
 
     private void Update()
     {
