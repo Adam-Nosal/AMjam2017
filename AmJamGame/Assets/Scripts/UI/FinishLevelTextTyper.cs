@@ -158,7 +158,8 @@ public class FinishLevelTextTyper : MonoBehaviour
     {
         if (!speak)
         {
-            WorldManager.Instance.LoadMenu();
+            Application.Quit();
+           // WorldManager.Instance.LoadMenu();
         }
     }
 }
