@@ -87,7 +87,7 @@ public class MenuCommandInterpreter : Singleton<MenuCommandInterpreter>
                     }
                 case "shake":
                     {
-                        Camera.main.GetComponent<CameraControl>().Shake(5.0f, 10, 10);
+                        WorldManager.Instance.ScreenShake();
                         break;
                     }
             }
