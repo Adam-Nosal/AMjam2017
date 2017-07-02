@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     public CommandsManager commandsManager;
     public bool isCodeRunning = false;
+    public int executionsCount;
 
     public List<Actor> possessionHistory;
 
@@ -15,7 +16,16 @@ public class GameManager : Singleton<GameManager>
 
     public JumpCamera2D camera2D;
 
+    private string[] textsb = new string[]
+    {
+        "There, was that so hard?",
+        "Awesome, I made it! Erm, I mean, we made it.",
+        "Treasure collected! You helped some, thanks.",
+        "I made it, and it was all on your own!"
+    };
+
     private int commandsNum = 0;
+
     
     void Awake()
     {
@@ -196,16 +206,24 @@ public class GameManager : Singleton<GameManager>
 
     public void CompleteLevel()
     {
+        int indexWin = Random.Range(0, textsb.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.CollectWin, indexWin);
+        Console2.Instance.AddFeedback(-1, textsb[indexWin], "green");
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Success);
         Debug.Log("Level complete!");
         WorldManager.Instance.LoadNextLevel();
+
     }
     public void Failed()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Fail);
+        WorldManager.Instance.ScreenShake();
         Debug.Log("Failed");
     }
 
     public void ResetGame()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.RunProgram);
         GetPossessedActor().SetPossessed(false);
         isCodeRunning = false;
         commandsNum = 0;

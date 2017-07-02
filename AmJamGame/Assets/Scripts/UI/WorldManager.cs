@@ -13,6 +13,8 @@ public class WorldManager : Singleton<WorldManager>
     private string audioLibraryPath = "mainAudioLibrary";
 
     public SoundManager soundManager;
+    public CameraControl cameraControl;
+    public JumpCamera2D jumpCamera;
 
     private int currentLevel = 0;                                  //Current level number
     
@@ -31,6 +33,8 @@ public class WorldManager : Singleton<WorldManager>
 
       //  soundManager.PlayAmbient();
     }
+
+
 
     void InitSoundManager()
     {
@@ -53,11 +57,37 @@ public class WorldManager : Singleton<WorldManager>
         }
     }
 
+    void InitCameraControl()
+    {
+        if(cameraControl == null)
+        {
+            cameraControl = Camera.main.GetComponent<CameraControl>();
+            cameraControl.RegisterShakeDone(ShakeDoneStabilize);
+        }
+    }
+
+    void ShakeDoneStabilize()
+    {
+        InitJumpCamera();
+        jumpCamera.enabled = true;
+        cameraControl.enabled = false;
+    }
+
     //Initializes the game for each level.
     public void InitGame()
     {
         InitLevelHolder();
         levelHolder.LoadLevel(currentLevel);
+
+    }
+
+    public void InitJumpCamera()
+    {
+        if (jumpCamera == null)
+        {
+            jumpCamera = Camera.main.GetComponent<JumpCamera2D>();
+
+        }
 
     }
 
@@ -73,6 +103,29 @@ public class WorldManager : Singleton<WorldManager>
     {
         InitAudioLibrary();
         return audioLibrary;
+    }
+
+    public void ScreenShake()
+    {
+        InitJumpCamera();
+        InitCameraControl();
+        if (jumpCamera.enabled != false)
+        {
+            jumpCamera.enabled = false;
+            cameraControl.enabled = true;
+            StartCoroutine(ShakeCoroutine());
+        }
+    }
+
+    private IEnumerator ShakeCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+    
+            cameraControl.TestShake();
+        
     }
 }
 

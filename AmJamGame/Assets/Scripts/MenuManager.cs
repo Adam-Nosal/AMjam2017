@@ -9,6 +9,8 @@ public class MenuManager : Singleton<MenuManager>
     public CommandsManager commandsManager;
     public bool isCodeRunning = false;
     public Text outputText;
+
+    public ConsoleMenu cMenu;
     
     private int commandsNum = 0;
 
@@ -16,7 +18,7 @@ public class MenuManager : Singleton<MenuManager>
     {
         commandsManager = new CommandsManager(CommandsManager.UpdateMethod.MANUAL);
         commandsManager.AddContext(new BaseContext("ActorsContext"));
-        
+        cMenu = ConsoleMenu.Instance;
     }
 
     private IEnumerator Start()
@@ -68,16 +70,17 @@ public class MenuManager : Singleton<MenuManager>
 
     public void PrintCredits()
     {
-        outputText.text = Credits;
+        cMenu.PrintCredits(Credits); ;
     }
 
 
-    private string Credits = " GameDesign:" + Environment.NewLine + 
-        " Michał Sapiński " + Environment.NewLine + Environment.NewLine + 
-        "Programming:" + Environment.NewLine + 
-        " Agata Chmiel " + Environment.NewLine +
-        " Łukasz Górny " + Environment.NewLine + 
-        " Adam Nosal " + Environment.NewLine +  Environment.NewLine +
-        " SoundDesign: " + Environment.NewLine + 
-        " Agnieszka Rumińska";
+    private string Credits = 
+        "GAME DESIGN:" + Environment.NewLine +
+        " <color=#29adff>Michał Sapiński</color>" + Environment.NewLine + Environment.NewLine +
+        "PROGRAMMING:" + Environment.NewLine +
+        " <color=#FF54DCFF>Agata Chmiel " + Environment.NewLine +
+        " Łukasz Górny " + Environment.NewLine +
+        " Adam Nosal</color>" + Environment.NewLine +  Environment.NewLine +
+        "SOUND DESIGN: " + Environment.NewLine +
+        " <color=cyan>Agnieszka Rumińska</color>";
 }

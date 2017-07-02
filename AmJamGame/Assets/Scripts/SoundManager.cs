@@ -7,12 +7,14 @@ public class SoundManager : Singleton<SoundManager> {
 
     [SerializeField]
     AudioSource ambientAudioSource;
-    [SerializeField]
-    float ambientVolume = 100.0f;
+
     [SerializeField]
     AudioSource effectsAudioSource;
+
+
     [SerializeField]
-    float effectsVolume = 100.0f;
+    AudioSource voiceOverAudioSource;
+
 
     AudioLibrary audioLibrary;
 
@@ -24,31 +26,119 @@ public class SoundManager : Singleton<SoundManager> {
         {
             ambientAudioSource = this.gameObject.AddComponent<AudioSource>();
             ambientAudioSource.clip = audioLibrary.GetAmbientClip();
-            ambientAudioSource.volume = ambientVolume;
+            ambientAudioSource.volume = audioLibrary.AmbientClipsVolume;
             ambientAudioSource.loop = true;
+            ambientAudioSource.playOnAwake = false;
+
         }
         if (effectsAudioSource == null)
         {
             effectsAudioSource = this.gameObject.AddComponent<AudioSource>();
             effectsAudioSource.clip = audioLibrary.GetAmbientClip();
             effectsAudioSource.loop = false;
-            effectsAudioSource.volume = effectsVolume;
+            effectsAudioSource.playOnAwake = false;
         }
+        if (voiceOverAudioSource == null)
+        {
+            voiceOverAudioSource = this.gameObject.AddComponent<AudioSource>();
+            voiceOverAudioSource.clip = audioLibrary.GetVoiceOverClip(0);
+            voiceOverAudioSource.loop = false;
+            voiceOverAudioSource.playOnAwake = false;
+        }
+    }
+
+    public bool IsVoiceOverPlaying
+    {
+     get {return  this.voiceOverAudioSource.isPlaying; }
     }
 
     [ContextMenu("PlayAmbient")]
     public void PlayAmbient()
     {
-
         ambientAudioSource.Play();
     }
 
     public void PlayEffect( AudioLibrary.soundEffects origin)
     {
-        effectsAudioSource.clip = audioLibrary.GetAudioClip(origin);
-   
-        effectsAudioSource.Play();
+        AudioClip clip = audioLibrary.GetAudioClip(origin);
+        if (clip != null)
+        {
+            effectsAudioSource.clip = clip;
+            effectsAudioSource.volume = audioLibrary.GetAudioVolume(origin);
+            effectsAudioSource.Play();
+         
+        }
     }
-    
-    
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="origin">type of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that type returns 0</returns>
+    public float PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(origin);
+        if (clip != null)
+        {
+            voiceOverAudioSource.clip = clip;
+            voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
+            voiceOverAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
+        }
+        return 0;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="origin">type of the clip. check AudioLibrary</param>
+    /// <param name="index">index of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that type returns 0</returns>
+    public float PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin, int index)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(origin,index);
+        if (clip != null)
+        {
+            voiceOverAudioSource.clip = clip;
+            voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
+            voiceOverAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
+        }
+        return 0;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index">number of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that index returns 0</returns>
+    public float PlayVoiceOver(int index)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(index);
+        if (clip != null)
+        {
+            voiceOverAudioSource.clip = clip;
+            voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
+            voiceOverAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
+        }
+        return 0;
+    }
+
+    public void StopVoiceover()
+    {
+        voiceOverAudioSource.Stop();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.KeyboardEnter);
+        }else if(Input.anyKeyDown== true)
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.KeyboardTypes);
+        }
+    }
+
 }

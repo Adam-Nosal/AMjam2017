@@ -52,29 +52,48 @@ public class TextManager : Singleton<TextManager> {
 
     #region methods
 
+
+    // WARNING! HARD CODED OFFETS HERE 
+
+
     public string GetBacketsText()
     {
-        return BracketsLack[Random.Range(0, BracketsLack.Length)];
+        int index = Random.Range(0, BracketsLack.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index);
+        return BracketsLack[index];
     }
     public string GetWrongCommandText()
     {
-        return CommandError[Random.Range(0, CommandError.Length)];
+        int index = Random.Range(0, CommandError.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index +3);
+        return CommandError[index];
     }
     public string GetWrongNumerText()
     {
-        return WrongArgumentsNumber[Random.Range(0, WrongArgumentsNumber.Length)];
+        int index = Random.Range(0, WrongArgumentsNumber.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index + 6);
+        return WrongArgumentsNumber[index];
     }
     public string GetWrongFirstText()
     {
-        return WrongArgumentsFirst[Random.Range(0, WrongArgumentsFirst.Length)];
+        int index = Random.Range(0, WrongArgumentsFirst.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index + 9);
+        return WrongArgumentsFirst[index];
     }
     public string GetWrongSecondText()
     {
-        return WrongArgumentsSecond[Random.Range(0, WrongArgumentsSecond.Length)];
+        int index = Random.Range(0, WrongArgumentsSecond.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index + 12);
+
+        return WrongArgumentsSecond[index];
     }
     public string GetSemicolonText()
     {
-        return SemicolonLack[Random.Range(0, SemicolonLack.Length)];
+        int index = Random.Range(0, SemicolonLack.Length);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.SyntaxError, index + 15);
+
+
+        return SemicolonLack[index];
     }
     #endregion
 

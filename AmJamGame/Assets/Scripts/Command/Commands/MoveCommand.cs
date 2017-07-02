@@ -49,12 +49,22 @@ public class MoveCommand : ActorCommand
             {
                 if(ExecutionResult.Contains("Blocked"))
                 {
-                    Console2.Instance.AddFeedback(lineNumber, textsBlock[Random.Range(0, textsBlock.Length)], "yellow");
+                    int blockindex = Random.Range(0, textsBlock.Length);
+                    if(!WorldManager.Instance.soundManager.IsVoiceOverPlaying)
+                    WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Bug, blockindex);
+
+                    Console2.Instance.AddFeedback(lineNumber, textsBlock[blockindex], "yellow");
                     ExecutionProgress = EExecutionProgress.SUCCESS;
                 }
                 else if(ExecutionResult.Contains("Killed"))
                 {
-                    Console2.Instance.AddFeedback(lineNumber, textsKill[Random.Range(0, textsKill.Length)]);
+                    int killindex = Random.Range(0, textsKill.Length);
+
+                    if (!WorldManager.Instance.soundManager.IsVoiceOverPlaying)
+                        WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Bug, killindex-1);
+
+
+                    Console2.Instance.AddFeedback(lineNumber, textsKill[killindex]);
                     ExecutionProgress = EExecutionProgress.FAILED;
                 }
                                 
@@ -62,7 +72,7 @@ public class MoveCommand : ActorCommand
                 yield break;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
         ExecutionProgress = EExecutionProgress.SUCCESS;
         Abort();

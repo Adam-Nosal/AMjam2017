@@ -14,8 +14,12 @@ public class IntroTexts : MonoBehaviour
 
     private int currentLine;
 
-	// Use this for initialization
-	IEnumerator Start ()
+    private Coroutine printCor;
+    bool isWaiting = false;
+    bool isWaitingRemove = false;
+
+    // Use this for initialization
+    IEnumerator Start ()
     {
         inputField.interactable = false;
         instruction.enabled = false;
@@ -24,18 +28,45 @@ public class IntroTexts : MonoBehaviour
         typer.OnComplete += Typer_OnComplete;
 
         yield return new WaitForSeconds(1f);
-        StartCoroutine(PrintLine(0f));
+        printCor = StartCoroutine(PrintLine(0f));
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
+        if(Input.anyKeyDown)
+        {
+            if(isWaiting)
+            {
+                isWaiting = false;
+                StopCoroutine("PrintLine");
+                typer.AppendText(lines[currentLine], "{0}");
+                WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Intro, currentLine);
+            }
+            else if(isWaitingRemove)
+            {
+                StopCoroutine("RemoveIntro");
+                isWaitingRemove = false;
+                RemoveIntroFromScreen();
+            }
+            else
+            {
+                typer.Skip();
+            }          
+           
+        }
 	}
 
     private IEnumerator PrintLine(float time)
     {
+        isWaiting = true;
         yield return new WaitForSeconds(time);
-        typer.AppendText(lines[currentLine], "{0}");
+        if (lines.Length > currentLine)
+        {
+            WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Intro, currentLine);
+            typer.AppendText(lines[currentLine], "{0}");
+        }
+        isWaiting = false;
     }
 
     private void Typer_OnComplete()
@@ -45,21 +76,29 @@ public class IntroTexts : MonoBehaviour
 
         if (lines.Length > currentLine)
         {
-            StartCoroutine(PrintLine(timeBetweenlines));
+            printCor = StartCoroutine(PrintLine(timeBetweenlines));
         }
         else
         {
-            StartCoroutine(RemoveIntro());
+            typer.OnComplete -= Typer_OnComplete;
+            StartCoroutine("RemoveIntro");
         }
     }
     private IEnumerator RemoveIntro()
     {
+        isWaitingRemove = true;
         yield return new WaitForSeconds(8f);
+        RemoveIntroFromScreen();
+    }
+
+    private void RemoveIntroFromScreen()
+    {
         inputField.text = "";
         inputField.interactable = true;
         instruction.enabled = true;
         ButtonRun.SetActive(true);
         inputField.Select();
-    }
 
+        WorldManager.Instance.soundManager.StopVoiceover();
+    }
 }

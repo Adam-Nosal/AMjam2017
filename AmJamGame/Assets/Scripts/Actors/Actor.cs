@@ -55,6 +55,7 @@ public abstract class Actor : MonoBehaviour
 
         if(actor == null)
         {
+            WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Possess);
             return "No actor to possess!";
         }
 
@@ -66,7 +67,6 @@ public abstract class Actor : MonoBehaviour
     public virtual string Move(directionType direction)
     {
         var newPosition = transform.localPosition;
-
         switch (direction)
         {
             case directionType.up:
@@ -87,7 +87,19 @@ public abstract class Actor : MonoBehaviour
 
         if (!result.Contains("Blocked"))
         {
+
             transform.localPosition = newPosition;
+
+            if (result.Contains("Win"))
+            {
+                GameManager.Instance.CompleteLevel();
+                return string.Empty;
+            }
+        }
+        else
+        {
+            WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Block);
+            WorldManager.Instance.ScreenShake();
         }
 
         return result;
@@ -109,7 +121,11 @@ public abstract class Actor : MonoBehaviour
         if(tile == null)
             return "Killed by void";
 
-        for (int i = 0; i < interactables.Length; i++)
+        if (tile.tag == "LevelFinish")
+            return "Win";
+
+
+            for (int i = 0; i < interactables.Length; i++)
         {
             if (interactables[i] == "Actor")
             {
@@ -144,7 +160,7 @@ public abstract class Actor : MonoBehaviour
         GameManager.Instance.RegisterActor(this); 
     }
 
-    public void SetPossessed(bool possess)
+    public virtual void SetPossessed(bool possess)
     {
         if (possess)
         {            
@@ -157,8 +173,9 @@ public abstract class Actor : MonoBehaviour
         }
     }
 
-    public void PrintPossess()
+    public virtual void PrintPossess()
     {
+        WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Possess);
         Console2.Instance.AddFeedback(-1, textsPossess[Random.Range(0, textsPossess.Length)], "white");
     }
 
