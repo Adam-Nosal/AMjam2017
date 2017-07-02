@@ -118,7 +118,14 @@ public abstract class Actor : MonoBehaviour
     {
         var tile = GameManager.Instance.GetTileAtPosition(x, y);
 
-        if(tile == null)
+        var interactable = GameManager.Instance.GetInteractableAtPosition(x, y);
+
+        if (interactable != null && interactable.tag == "LevelFinish")
+        {
+            return "Win";
+        }
+
+        if (tile == null)
             return "Killed by void";
 
         if (tile.tag == "LevelFinish")
@@ -127,7 +134,7 @@ public abstract class Actor : MonoBehaviour
 
             for (int i = 0; i < interactables.Length; i++)
         {
-            if (interactables[i] == "Actor")
+            if (interactables[i] == "Actor" || interactables[i] == "Teleport")
             {
                 var actor = GameManager.Instance.GetActorAtPosition(x, y, this);
                 if (actor != null)

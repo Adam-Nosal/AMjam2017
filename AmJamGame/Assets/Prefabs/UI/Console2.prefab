@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inverted: 0
-  timeForChar: 0.001
+  timeForChar: 0.065
   textFieldInput: {fileID: 114554180775675454}
 --- !u!114 &114246430367464280
 MonoBehaviour:
@@ -881,7 +881,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: f43bc528068851e41b9bb15d1acd4995, type: 3}
-    m_FontSize: 17
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1137,17 +1137,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - 'Alright, time to prove your worth. You will have to mov me to the goal, that
-    yellow thingy. '
-  - Good luck, human.
+  - Alright, time to prove your worth. You will have to mov me to the goal, that yellow
+    thingy. Good luck, human.
   - Type your input here, and run by pressing the button with the arrow icon.
   - You can input more than one method at a time, remember that.
   - "Here, I\u2019ll fill something out for you."
   - Click this field to start typing.
   textTyper: {fileID: 114191099105310036}
   inputField: {fileID: 114554180775675454}
+  audioLib: 10
+  lockGO:
+  - {fileID: 1420454779770474}
+  - {fileID: 1578778254509816}
   predefinedCommands:
-  - mov(r,4);
+  - mov(r,3);
   - mov(u,3);
   timeBetweenLines: 1
 --- !u!222 &222041489181834124
@@ -1287,7 +1290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16.200012, y: -146.6}
+  m_AnchoredPosition: {x: 16.84201, y: -143}
   m_SizeDelta: {x: 17.099976, y: 16.200012}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224115261604314522
@@ -1471,7 +1474,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.100006, y: -122.7}
+  m_AnchoredPosition: {x: 17.100006, y: -120.9}
   m_SizeDelta: {x: 18, y: 17}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224477719932160690
@@ -1556,7 +1559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.425995, y: -71.3}
+  m_AnchoredPosition: {x: 16.84201, y: -70.1}
   m_SizeDelta: {x: 15.932983, y: 15.100006}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224945844601695758
@@ -1610,6 +1613,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.425995, y: -97.481}
+  m_AnchoredPosition: {x: 17.425995, y: -95.4}
   m_SizeDelta: {x: 17.099976, y: 16.200012}
   m_Pivot: {x: 1, y: 1}

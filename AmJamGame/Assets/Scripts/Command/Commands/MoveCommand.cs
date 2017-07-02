@@ -41,7 +41,22 @@ public class MoveCommand : ActorCommand
     {
         for (int i = 0; i < iterations; i++)
         {
-            ExecutionResult = actor.Move(direction);
+            if(actor is BallonActor)
+            {
+                ExecutionResult = actor.Move(direction);
+
+                while (ExecutionResult == string.Empty)
+                {
+                    ExecutionResult = actor.Move(direction);
+                    yield return new WaitForSeconds(0.2f);
+                }
+                
+            }
+            else
+            {
+                ExecutionResult = actor.Move(direction);
+            }
+            
 
             if (!string.IsNullOrEmpty(ExecutionResult))
             {
