@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FinishLevelTextTyper : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class FinishLevelTextTyper : MonoBehaviour
     }
 
     public bool inverted;
-
+    public GameObject lipMask;
+    public GameObject eyesMask;
     public float timeForChar = 0.001f;
 
     private UnityEngine.UI.Text textField;
@@ -23,16 +25,13 @@ public class FinishLevelTextTyper : MonoBehaviour
 
     int currentIndex = 0;
     string baseText;
-
-    public event Action OnComplete = ()=> { };
+    bool speak = true;
+    public event Action OnComplete = () => { };
 
     public void Start()
     {
-        textField = GetComponent<UnityEngine.UI.Text>();   
-      //  AppendText(
-            //"I realized I will never find my one, “true” form. 
-            //But you helped me along the way.It was a real FailTale™.
-            //Thanks for nothing.") ;    
+        textField = GetComponent<UnityEngine.UI.Text>();
+        AppendText("I realized I will never find my one, “true” form.\nBut you helped me along the way.It was a real FailTale™.\nThanks for nothing.", "{0}");
     }
 
     public void AppendText(string text, string format)
@@ -45,13 +44,14 @@ public class FinishLevelTextTyper : MonoBehaviour
 
         if (!isCorutineRunning)
             StartCoroutine("TypeText");
+        StartCoroutine("Speak");
     }
 
     public void Skip()
     {
         if (lines.Count <= 0)
             return;
-
+        speak = false;
         StopCoroutine("TypeText");
 
         var currentLine = lines[lines.Count - 1];
@@ -82,21 +82,21 @@ public class FinishLevelTextTyper : MonoBehaviour
         isCorutineRunning = false;
         OnComplete();
     }
-	
+
     public IEnumerator TypeText()
     {
-        var currentLine = lines[lines.Count-1];
+        var currentLine = lines[lines.Count - 1];
         baseText = textField.text;
 
         if (textFieldInput != null)
             baseText = textFieldInput.text;
 
         currentIndex = 0;
-
+        speak = true;
         isCorutineRunning = true;
         while (currentIndex < currentLine.text.Length)
         {
-            if(textFieldInput != null)
+            if (textFieldInput != null)
             {
                 if (!inverted)
                     textFieldInput.text = baseText + string.Format(currentLine.format, currentLine.text.Substring(0, currentIndex + 1));
@@ -112,20 +112,32 @@ public class FinishLevelTextTyper : MonoBehaviour
             }
 
             currentIndex++;
-
             yield return new WaitForSeconds(timeForChar);
         }
 
         lines.Remove(currentLine);
+        speak = false;
 
         if (lines.Count > 0)
         {
             StartCoroutine("TypeText");
             yield break;
         }
-        
+
 
         isCorutineRunning = false;
         OnComplete();
+    }
+
+    public IEnumerator Speak()
+    {
+        while (speak)
+        {
+            lipMask.SetActive(!lipMask.activeSelf);
+            yield return new WaitForSeconds(0.15f);
+        }
+        
+        eyesMask.SetActive(true);
+        lipMask.SetActive(false);
     }
 }
