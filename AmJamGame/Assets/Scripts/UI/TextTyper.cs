@@ -19,6 +19,8 @@ public class TextTyper : MonoBehaviour
 
     public List<LineToAdd> lines = new List<LineToAdd>();
 
+    int currentIndex = 0;
+    string baseText;
 
     public event Action OnComplete = ()=> { };
 
@@ -36,23 +38,54 @@ public class TextTyper : MonoBehaviour
         lines.Add(line);
 
         if (!isCorutineRunning)
-            StartCoroutine(TypeText());
+            StartCoroutine("TypeText");
     }
 
     public void Skip()
     {
+        if (lines.Count <= 0)
+            return;
+
+        StopCoroutine("TypeText");
+
+        var currentLine = lines[lines.Count - 1];
+
+        if (textFieldInput != null)
+        {
+            if (!inverted)
+                textFieldInput.text = baseText + string.Format(currentLine.format, currentLine.text);
+            else
+                textFieldInput.text = string.Format(currentLine.format, currentLine.text) + baseText;
+        }
+        else
+        {
+            if (!inverted)
+                textField.text = baseText + string.Format(currentLine.format, currentLine.text);
+            else
+                textField.text = string.Format(currentLine.format, currentLine.text) + baseText;
+        }
+
+        lines.Remove(currentLine);
+
+        if (lines.Count > 0)
+        {
+            StartCoroutine("TypeText");
+            return;
+        }
+
+        isCorutineRunning = false;
         OnComplete();
     }
 	
     public IEnumerator TypeText()
     {
         var currentLine = lines[lines.Count-1];
-        var baseText = textField.text;
+        baseText = textField.text;
 
         if (textFieldInput != null)
             baseText = textFieldInput.text;
 
-        var currentIndex = 0;
+        currentIndex = 0;
 
         isCorutineRunning = true;
         while (currentIndex < currentLine.text.Length)
@@ -81,7 +114,7 @@ public class TextTyper : MonoBehaviour
 
         if (lines.Count > 0)
         {
-            StartCoroutine(TypeText());
+            StartCoroutine("TypeText");
             yield break;
         }
         

@@ -14,8 +14,12 @@ public class IntroTexts : MonoBehaviour
 
     private int currentLine;
 
-	// Use this for initialization
-	IEnumerator Start ()
+    private Coroutine printCor;
+    bool isWaiting = false;
+    bool isWaitingRemove = false;
+
+    // Use this for initialization
+    IEnumerator Start ()
     {
         inputField.interactable = false;
         instruction.enabled = false;
@@ -24,25 +28,44 @@ public class IntroTexts : MonoBehaviour
         typer.OnComplete += Typer_OnComplete;
 
         yield return new WaitForSeconds(1f);
-        StartCoroutine(PrintLine(0f));
+        printCor = StartCoroutine(PrintLine(0f));
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
-        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if(Input.anyKeyDown)
         {
-            StopCoroutine("PrintLine");
-            currentLine = 500;
-            typer.Skip();
-            StartCoroutine(RemoveIntro());
+            if(isWaiting)
+            {
+                isWaiting = false;
+                StopCoroutine("PrintLine");
+                typer.AppendText(lines[currentLine], "{0}");
+            }
+            else if(isWaitingRemove)
+            {
+                StopCoroutine("RemoveIntro");
+                isWaitingRemove = false;
+                inputField.text = "";
+                inputField.interactable = true;
+                instruction.enabled = true;
+                ButtonRun.SetActive(true);
+                inputField.Select();
+            }else
+            {
+                typer.Skip();
+            }          
+           
         }
 	}
 
     private IEnumerator PrintLine(float time)
     {
+        isWaiting = true;
         yield return new WaitForSeconds(time);
-        typer.AppendText(lines[currentLine], "{0}");
+        if (lines.Length > currentLine)
+            typer.AppendText(lines[currentLine], "{0}");
+        isWaiting = false;
     }
 
     private void Typer_OnComplete()
@@ -52,15 +75,17 @@ public class IntroTexts : MonoBehaviour
 
         if (lines.Length > currentLine)
         {
-            StartCoroutine(PrintLine(timeBetweenlines));
+            printCor = StartCoroutine(PrintLine(timeBetweenlines));
         }
         else
         {
-            StartCoroutine(RemoveIntro());
+            typer.OnComplete -= Typer_OnComplete;
+            StartCoroutine("RemoveIntro");
         }
     }
     private IEnumerator RemoveIntro()
     {
+        isWaitingRemove = true;
         yield return new WaitForSeconds(8f);
         inputField.text = "";
         inputField.interactable = true;
