@@ -15,6 +15,7 @@ public class WorldManager : Singleton<WorldManager>
     public SoundManager soundManager;
     public CameraControl cameraControl;
     public JumpCamera2D jumpCamera;
+    public ScreenResolutionManager screenResManager;
 
     private int currentLevel = 0;                                  //Current level number
     
@@ -22,7 +23,7 @@ public class WorldManager : Singleton<WorldManager>
     {
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(this.gameObject);
-
+        screenResManager = ScreenResolutionManager.Instance;
         InitLevelHolder();
         InitAudioLibrary();
         InitSoundManager();
