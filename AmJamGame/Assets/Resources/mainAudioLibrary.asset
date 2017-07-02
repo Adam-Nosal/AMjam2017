@@ -187,3 +187,5 @@ MonoBehaviour:
   TutorialTwoVoiceOverEffectsClips:
   - {fileID: 8300000, guid: 8a7fad0803f398a49872d96c57320c79, type: 3}
   - {fileID: 8300000, guid: c39c48bffb52821458b234f3092b1c08, type: 3}
+  OutroVoiceOverEffectClip: {fileID: 8300000, guid: 57f6adbe4da48574b89df84ec6441b40,
+    type: 3}

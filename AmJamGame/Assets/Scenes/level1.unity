@@ -42214,6 +42214,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
         type: 2}
+      propertyPath: lines.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
       propertyPath: lockGO.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -42267,6 +42272,47 @@ Prefab:
     - target: {fileID: 1367539479541538, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114191099105310036, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: timeForChar
+      value: 0.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: audioLib
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[0]
+      value: Alright, time to prove your worth. You will have to mov me to the goal,
+        that yellow thingy. Good luck, human.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[1]
+      value: Type your input here, and run by pressing the button with the arrow icon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[2]
+      value: You can input more than one method at a time, remember that.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[3]
+      value: "Here, I\u2019ll fill something out for you."
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[4]
+      value: Click this field to start typing.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lines.Array.data[5]
+      value: Click this field to start typing.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
