@@ -25,4 +25,7 @@ EditorBuildSettings:
     guid: db578e9655bd0c04bb809862c511ac66
   - enabled: 1
     path: Assets/Scenes/level5.unity
-    guid: 00000000000000000000000000000000
+    guid: 98aa27ffa53ef5345805df0290886cd2
+  - enabled: 1
+    path: Assets/Scenes/finishScene.unity
+    guid: 85669eac634e11046a2292a51afc96f8
