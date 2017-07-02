@@ -42,9 +42,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
         {
             if (usedCommandsList[i].Length == 0 || usedCommandsList[i].Replace(" ", string.Empty).Length == 0)
             {
-               // Console2.Instance.AddFeedback(i, "Type sth you idiot!");
-              //  usedCommandsList.Clear();
-                return;
+                // empty
             }
 
             if (usedCommandsList[i].IndexOf('(') < 0 )
@@ -77,23 +75,38 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                         string param1 = usedCommandsList[i].Substring(bracket+1, comma - (bracket + 1)).Replace(" ", string.Empty);
                         directionType dir;
 
-                        if (param1==directionType.down.ToString() || param1 == directionType.up.ToString() || param1 == directionType.left.ToString() || param1 == directionType.right.ToString())
-                            dir = (directionType)Enum.Parse(typeof(directionType), param1);
-                        else
-                        {
-                            Console2.Instance.AddFeedback(i, TextManager.Instance.GetWrongFirstText());
-                            return;
-                        }
-
-                        ////check direction
-                        //try {
+                        //if (param1==directionType.down.ToString() || param1 == directionType.up.ToString() || param1 == directionType.left.ToString() || param1 == directionType.right.ToString())
                         //    dir = (directionType)Enum.Parse(typeof(directionType), param1);
-                        //}
-                        //catch(Exception e)
+                        //else
                         //{
                         //    Console2.Instance.AddFeedback(i, TextManager.Instance.GetWrongFirstText());
                         //    return;
                         //}
+
+                        switch (param1)
+                        {
+                            case "l":
+                            case "left":
+                                dir = directionType.left;
+                                break;
+                            case "r":
+                            case "right":
+                                dir = directionType.right;
+                                break;
+                            case "u":
+                            case "up":
+                                dir = directionType.up;
+                                break;
+                            case "d":
+                            case "down":
+                                dir = directionType.down;
+                                break;
+                            default:
+                                Console2.Instance.AddFeedback(i, TextManager.Instance.GetWrongFirstText());
+                                return;
+                        }
+
+                       
 
                         //check number
                         int iterations;
@@ -136,7 +149,7 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
         foreach (var com in commands)
             Debug.Log(com.Name);
 
-        GameManager.Instance.ExecuteCommands(commands);
+          GameManager.Instance.ExecuteCommands(commands);
     }
 
     void InitialElementsCheck(string command)
