@@ -43,7 +43,7 @@ public class TextManager : Singleton<TextManager> {
 
     string[] SemicolonLack =
 {
-"You know that thing right to the “r” button? The semicolon, yes. Use it next time.",
+"You know that thing right to the “l” button? The semicolon, yes. Use it next time.",
 "End the line with a semicolon, try to remember that.",
 "Methods should end with semicolon, k?" 
         };
