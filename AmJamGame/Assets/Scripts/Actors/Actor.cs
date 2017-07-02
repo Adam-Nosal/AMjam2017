@@ -55,6 +55,7 @@ public abstract class Actor : MonoBehaviour
 
         if(actor == null)
         {
+            WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Possess);
             return "No actor to possess!";
         }
 
@@ -159,7 +160,7 @@ public abstract class Actor : MonoBehaviour
         GameManager.Instance.RegisterActor(this); 
     }
 
-    public void SetPossessed(bool possess)
+    public virtual void SetPossessed(bool possess)
     {
         if (possess)
         {            
@@ -172,7 +173,7 @@ public abstract class Actor : MonoBehaviour
         }
     }
 
-    public void PrintPossess()
+    public virtual void PrintPossess()
     {
         WorldManager.Instance.soundManager.PlayEffect(AudioLibrary.soundEffects.Possess);
         Console2.Instance.AddFeedback(-1, textsPossess[Random.Range(0, textsPossess.Length)], "white");
