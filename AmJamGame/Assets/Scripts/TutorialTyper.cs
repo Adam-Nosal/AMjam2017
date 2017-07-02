@@ -8,6 +8,8 @@ public class TutorialTyper : MonoBehaviour
     public TextTyper textTyper;
     public UnityEngine.UI.InputField inputField;
 
+    public GameObject[] lockGO;
+
     public string[] predefinedCommands;
 
     public float timeBetweenLines;
@@ -17,6 +19,9 @@ public class TutorialTyper : MonoBehaviour
 
     public void Start()
     {
+        foreach (var go in lockGO)
+            go.SetActive(false);
+
         inputField.interactable = false;
         textTyper.OnComplete += TextTyper_OnComplete;
         StartCoroutine(DelayPlayNextLine());
@@ -50,6 +55,9 @@ public class TutorialTyper : MonoBehaviour
     
     private void ActivateInput()
     {
+        foreach (var go in lockGO)
+            go.SetActive(true);
+
         isInputActive = true;
         textTyper.OnComplete -= TextTyper_OnComplete;
     }
