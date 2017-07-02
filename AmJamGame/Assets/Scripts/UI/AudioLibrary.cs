@@ -37,7 +37,10 @@ public class AudioLibrary : ScriptableObject
         Balloon=6,
         Key =7,
         CollectWin = 8,
-        SyntaxError=9
+        SyntaxError=9,
+        TutorialOne=10,
+        TutorialTwo = 11
+
     }
 
 
@@ -111,6 +114,8 @@ public class AudioLibrary : ScriptableObject
     public List<AudioClip> KeyVoiceOverEffectsClips;
     public List<AudioClip> CollectWinVoiceOverEffectsClips;
     public List<AudioClip> SyntaxErrorVoiceOverEffectsClips;
+    public List<AudioClip> TutorialOneVoiceOverEffectsClips;
+    public List<AudioClip> TutorialTwoVoiceOverEffectsClips;
 
     public AudioClip GetAudioClip(soundEffects origin)
     {
@@ -221,7 +226,11 @@ public class AudioLibrary : ScriptableObject
                 return SmileyVoiceOverEffectsClips;
             case VoiceOverEffects.SyntaxError:
                 return SyntaxErrorVoiceOverEffectsClips;
-                default: return BugVoiceOverEffectsClips;
+            case VoiceOverEffects.TutorialOne:
+                return TutorialOneVoiceOverEffectsClips;
+            case VoiceOverEffects.TutorialTwo:
+                return TutorialTwoVoiceOverEffectsClips;
+            default: return BugVoiceOverEffectsClips;
         }
     }
 
