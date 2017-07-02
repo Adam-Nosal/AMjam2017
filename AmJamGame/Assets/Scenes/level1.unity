@@ -42212,6 +42212,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lockGO.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4735677524832896, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
       propertyPath: m_LocalPosition.x
       value: -16.33
@@ -42244,18 +42249,34 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114760111052186204, guid: c44f73cb779ab07479ad121c2ff196e1,
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1152773805}
-    - target: {fileID: 1367539479541538, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: predefinedCommands.Array.data[0]
+      value: mov(r,3);
       objectReference: {fileID: 0}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lockGO.Array.data[0]
+      value: 
+      objectReference: {fileID: 2057608681}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: lockGO.Array.data[1]
+      value: 
+      objectReference: {fileID: 2057608680}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2057608680 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1578778254509816, guid: c44f73cb779ab07479ad121c2ff196e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 2057608679}
+--- !u!1 &2057608681 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1420454779770474, guid: c44f73cb779ab07479ad121c2ff196e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 2057608679}
 --- !u!1 &2060584668
 GameObject:
   m_ObjectHideFlags: 0

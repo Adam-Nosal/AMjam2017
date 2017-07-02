@@ -12,7 +12,8 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
         {
             "mov",
             "use",
-            "pos"
+            "pos",
+            "winner"
         };
     // Use this for initialization
     void Start()
@@ -131,6 +132,11 @@ public class CommandInterpreter : Singleton<CommandInterpreter>
                     {
                         PossessCommand move = new PossessCommand(actor, i);
                         commands.Add(move);
+                        break;
+                    }
+                case "winner":
+                    {
+                        GameManager.Instance.CompleteLevel();
                         break;
                     }
             }
