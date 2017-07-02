@@ -46,12 +46,9 @@ public class IntroTexts : MonoBehaviour
             {
                 StopCoroutine("RemoveIntro");
                 isWaitingRemove = false;
-                inputField.text = "";
-                inputField.interactable = true;
-                instruction.enabled = true;
-                ButtonRun.SetActive(true);
-                inputField.Select();
-            }else
+                RemoveIntroFromScreen();
+            }
+            else
             {
                 typer.Skip();
             }          
@@ -87,11 +84,15 @@ public class IntroTexts : MonoBehaviour
     {
         isWaitingRemove = true;
         yield return new WaitForSeconds(8f);
+        RemoveIntroFromScreen();
+    }
+
+    private void RemoveIntroFromScreen()
+    {
         inputField.text = "";
         inputField.interactable = true;
         instruction.enabled = true;
         ButtonRun.SetActive(true);
         inputField.Select();
     }
-
 }
