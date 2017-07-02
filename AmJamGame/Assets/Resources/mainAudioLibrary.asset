@@ -61,7 +61,7 @@ MonoBehaviour:
   PossessEffectsClipsVolume: 0.349
   ambientClips:
   - {fileID: 8300000, guid: 7c96e327dce64ba4eb8da2c30108761d, type: 3}
-  AmbientClipsVolume: 0.2
+  AmbientClipsVolume: 0.18
   voiceOvers:
   - {fileID: 8300000, guid: e8bc372bbec8ffe4b88410c473b28255, type: 3}
   - {fileID: 8300000, guid: 7e14da099e73c0044bcfac658426c953, type: 3}
@@ -178,3 +178,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22a469f3c0e90304e90e386ddca553f8, type: 3}
   - {fileID: 8300000, guid: b0ecefa653b82a8448d27d68a7e63d2d, type: 3}
   - {fileID: 8300000, guid: f19acb3a530dd694db14cd1e850281b6, type: 3}
+  TutorialOneVoiceOverEffectsClips:
+  - {fileID: 8300000, guid: 00f4fea3a38008747b64741d91939b02, type: 3}
+  - {fileID: 8300000, guid: d8ad8c79a221dd043902ea841a225db0, type: 3}
+  - {fileID: 8300000, guid: a0fe3673a0ec6f840b183cfe1d22f12b, type: 3}
+  - {fileID: 8300000, guid: 8a9bbbad0414cb547a824e81ea790b96, type: 3}
+  - {fileID: 8300000, guid: 02c0c17d8cbe003419701e41a45f9059, type: 3}
+  TutorialTwoVoiceOverEffectsClips:
+  - {fileID: 8300000, guid: 8a7fad0803f398a49872d96c57320c79, type: 3}
+  - {fileID: 8300000, guid: c39c48bffb52821458b234f3092b1c08, type: 3}
