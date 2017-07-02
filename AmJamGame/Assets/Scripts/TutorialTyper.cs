@@ -54,10 +54,7 @@ public class TutorialTyper : MonoBehaviour
     }
     
     private void ActivateInput()
-    {
-        foreach (var go in lockGO)
-            go.SetActive(true);
-
+    {        
         isInputActive = true;
         textTyper.OnComplete -= TextTyper_OnComplete;
     }
@@ -71,7 +68,10 @@ public class TutorialTyper : MonoBehaviour
             foreach (var command in predefinedCommands)
                 inputField.text += command + "\n";
 
-            inputField.interactable = true;            
+            inputField.interactable = true;
+
+            foreach (var go in lockGO)
+                go.SetActive(true);
 
             isInputActive = false;
         }
