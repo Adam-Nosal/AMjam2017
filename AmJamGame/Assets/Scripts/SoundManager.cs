@@ -57,6 +57,7 @@ public class SoundManager : Singleton<SoundManager> {
             effectsAudioSource.clip = clip;
             effectsAudioSource.volume = audioLibrary.GetAudioVolume(origin);
             effectsAudioSource.Play();
+         
         }
     }
 
@@ -65,10 +66,29 @@ public class SoundManager : Singleton<SoundManager> {
     /// 
     /// </summary>
     /// <param name="origin">type of the clip. check AudioLibrary</param>
-    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that index returns 0</returns>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that type returns 0</returns>
     public float PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin)
     {
         AudioClip clip = audioLibrary.GetVoiceOverClip(origin);
+        if (clip != null)
+        {
+            effectsAudioSource.clip = clip;
+            effectsAudioSource.volume = audioLibrary.VoiceOversVolume;
+            effectsAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
+        }
+        return 0;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="origin">type of the clip. check AudioLibrary</param>
+    /// <param name="index">index of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that type returns 0</returns>
+    public float PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin, int index)
+    {
+        AudioClip clip = audioLibrary.GetVoiceOverClip(origin,index);
         if (clip != null)
         {
             effectsAudioSource.clip = clip;

@@ -140,6 +140,16 @@ public class AudioLibrary : ScriptableObject
         }
     }
 
+    public AudioClip GetVoiceOverClip(VoiceOverEffects origin, int index)
+    {
+        List<AudioClip> list = GetVoiceOverList(origin);
+        if (index < list.Capacity)
+            return list[index];
+        else
+            return list[0];
+       
+    }
+
     public AudioClip GetAmbientClip(int id = 0)
     {
         return ambientClips[id];
