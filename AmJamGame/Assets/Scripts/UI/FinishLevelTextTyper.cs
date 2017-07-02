@@ -32,6 +32,7 @@ public class FinishLevelTextTyper : MonoBehaviour
     public void Start()
     {
         textField = GetComponent<UnityEngine.UI.Text>();
+        WorldManager.Instance.soundManager.PlayFinishVoiceOver();
         AppendText("I realized I will never find my one, “true” form.\nBut you helped me along the way.It was a real FailTale™.\nThanks for nothing.", "{0}");
     }
 

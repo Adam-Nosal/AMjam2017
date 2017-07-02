@@ -125,6 +125,19 @@ public class SoundManager : Singleton<SoundManager> {
         return 0;
     }
 
+    public float PlayFinishVoiceOver()
+    {
+        AudioClip clip = audioLibrary.OutroVoiceOverEffectClip;
+        if (clip != null)
+        {
+            voiceOverAudioSource.clip = clip;
+            voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
+            voiceOverAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
+        }
+        return 0;
+    }
+
     public void StopVoiceover()
     {
         voiceOverAudioSource.Stop();

@@ -39,7 +39,8 @@ public class AudioLibrary : ScriptableObject
         CollectWin = 8,
         SyntaxError=9,
         TutorialOne=10,
-        TutorialTwo = 11
+        TutorialTwo = 11, 
+        Outro = 12
 
     }
 
@@ -116,6 +117,7 @@ public class AudioLibrary : ScriptableObject
     public List<AudioClip> SyntaxErrorVoiceOverEffectsClips;
     public List<AudioClip> TutorialOneVoiceOverEffectsClips;
     public List<AudioClip> TutorialTwoVoiceOverEffectsClips;
+    public AudioClip OutroVoiceOverEffectClip;
 
     public AudioClip GetAudioClip(soundEffects origin)
     {

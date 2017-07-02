@@ -15045,6 +15045,16 @@ Prefab:
       propertyPath: lockGO.Array.data[1]
       value: 
       objectReference: {fileID: 1170310350}
+    - target: {fileID: 114959680760831730, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: audioLib
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114191099105310036, guid: c44f73cb779ab07479ad121c2ff196e1,
+        type: 2}
+      propertyPath: timeForChar
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c44f73cb779ab07479ad121c2ff196e1, type: 2}
   m_IsPrefabParent: 0

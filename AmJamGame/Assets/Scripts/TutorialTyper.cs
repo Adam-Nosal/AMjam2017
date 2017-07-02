@@ -8,6 +8,8 @@ public class TutorialTyper : MonoBehaviour
     public TextTyper textTyper;
     public UnityEngine.UI.InputField inputField;
 
+    public AudioLibrary.VoiceOverEffects audioLib;
+
     public GameObject[] lockGO;
 
     public string[] predefinedCommands;
@@ -48,7 +50,7 @@ public class TutorialTyper : MonoBehaviour
     private void PlayNextLine()
     {
         currentLine++;
-        //WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Intro, currentLine);
+        WorldManager.Instance.soundManager.PlayVoiceOverByType(audioLib, currentLine);
         inputField.text += "\n";
         textTyper.AppendText(lines[currentLine], "{0}");
     }
