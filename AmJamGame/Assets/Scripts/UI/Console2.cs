@@ -48,8 +48,14 @@ public class Console2 : Singleton<Console2> {
                 }
            }
         }
+       
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+            RunButtonClicked();
+            }
+        
 
-       if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete))
         {
             UpdateScores();
         }
