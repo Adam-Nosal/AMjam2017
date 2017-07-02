@@ -116,6 +116,11 @@ public class SoundManager : Singleton<SoundManager> {
         return 0;
     }
 
+    public void StopVoiceover()
+    {
+        voiceOverAudioSource.Stop();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))

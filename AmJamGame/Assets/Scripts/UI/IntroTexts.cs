@@ -41,6 +41,7 @@ public class IntroTexts : MonoBehaviour
                 isWaiting = false;
                 StopCoroutine("PrintLine");
                 typer.AppendText(lines[currentLine], "{0}");
+                WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Intro, currentLine);
             }
             else if(isWaitingRemove)
             {
@@ -61,7 +62,10 @@ public class IntroTexts : MonoBehaviour
         isWaiting = true;
         yield return new WaitForSeconds(time);
         if (lines.Length > currentLine)
+        {
+            WorldManager.Instance.soundManager.PlayVoiceOverByType(AudioLibrary.VoiceOverEffects.Intro, currentLine);
             typer.AppendText(lines[currentLine], "{0}");
+        }
         isWaiting = false;
     }
 
@@ -94,5 +98,7 @@ public class IntroTexts : MonoBehaviour
         instruction.enabled = true;
         ButtonRun.SetActive(true);
         inputField.Select();
+
+        WorldManager.Instance.soundManager.StopVoiceover();
     }
 }

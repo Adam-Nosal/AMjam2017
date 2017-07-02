@@ -13,6 +13,8 @@ public class TextTyper : MonoBehaviour
 
     public bool inverted;
 
+    public float timeForChar = 0.001f;
+
     private UnityEngine.UI.Text textField;
     public UnityEngine.UI.InputField textFieldInput;
     private bool isCorutineRunning = false;
@@ -107,7 +109,7 @@ public class TextTyper : MonoBehaviour
 
             currentIndex++;
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(timeForChar);
         }
 
         lines.Remove(currentLine);
