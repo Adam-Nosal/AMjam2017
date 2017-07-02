@@ -60,7 +60,13 @@ public class SoundManager : Singleton<SoundManager> {
         }
     }
 
-    public void PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="origin">type of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that index returns 0</returns>
+    public float PlayVoiceOverByType(AudioLibrary.VoiceOverEffects origin)
     {
         AudioClip clip = audioLibrary.GetVoiceOverClip(origin);
         if (clip != null)
@@ -68,10 +74,16 @@ public class SoundManager : Singleton<SoundManager> {
             effectsAudioSource.clip = clip;
             effectsAudioSource.volume = audioLibrary.VoiceOversVolume;
             effectsAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
         }
+        return 0;
     }
-
-    public void PlayVoiceOver(int index)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index">number of the clip. check AudioLibrary</param>
+    /// <returns> returns length of the voiceOver in seconds, if there is no voiceover of that index returns 0</returns>
+    public float PlayVoiceOver(int index)
     {
         AudioClip clip = audioLibrary.GetVoiceOverClip(index);
         if (clip != null)
@@ -79,7 +91,9 @@ public class SoundManager : Singleton<SoundManager> {
             voiceOverAudioSource.clip = clip;
             voiceOverAudioSource.volume = audioLibrary.VoiceOversVolume;
             voiceOverAudioSource.Play();
+            return voiceOverAudioSource.clip.length;
         }
+        return 0;
     }
 
     private void Update()
