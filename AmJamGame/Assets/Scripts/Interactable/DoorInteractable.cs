@@ -28,6 +28,7 @@ public class DoorInteractable : InteractableObject
 
         GameManager.Instance.UnregisterInteractable(this);
         ChangeState();
+        gameObject.tag = "DoorOpen";
         //var renderers = gameObject.GetComponentsInChildren<Renderer>();
         //foreach (var rendr in renderers)
         //    rendr.enabled = false;
