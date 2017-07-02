@@ -97,7 +97,11 @@ public class WorldManager : Singleton<WorldManager>
         InitLevelHolder();
         currentLevel++;
         levelHolder.LoadLevel(currentLevel);
+    }
 
+    public void LoadMenu()
+    {
+        levelHolder.LoadMenu();
     }
 
     public AudioLibrary GetAudioLibrary()

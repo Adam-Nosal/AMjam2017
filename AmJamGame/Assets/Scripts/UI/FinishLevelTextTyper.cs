@@ -27,11 +27,21 @@ public class FinishLevelTextTyper : MonoBehaviour
     string baseText;
     bool speak = true;
     public event Action OnComplete = () => { };
+    bool restart = false;
 
     public void Start()
     {
         textField = GetComponent<UnityEngine.UI.Text>();
         AppendText("I realized I will never find my one, “true” form.\nBut you helped me along the way.It was a real FailTale™.\nThanks for nothing.", "{0}");
+    }
+
+    public void Update()
+    {
+        if(Input.anyKey && !restart)
+        {
+            restart = true;
+            Restart();
+        }
     }
 
     public void AppendText(string text, string format)
@@ -124,12 +134,14 @@ public class FinishLevelTextTyper : MonoBehaviour
             yield break;
         }
 
-
         isCorutineRunning = false;
         OnComplete();
+
+        //yield return new WaitForSeconds(3);
+      //  WorldManager.Instance.LoadMenu();
     }
 
-    public IEnumerator Speak()
+    IEnumerator Speak()
     {
         while (speak)
         {
@@ -139,5 +151,13 @@ public class FinishLevelTextTyper : MonoBehaviour
         
         eyesMask.SetActive(true);
         lipMask.SetActive(false);
+    }
+
+   void Restart()
+    {
+        if (!speak)
+        {
+            WorldManager.Instance.LoadMenu();
+        }
     }
 }
