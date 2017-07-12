@@ -4,6 +4,15 @@ using UnityEngine;
 
 public abstract class Actor : MonoBehaviour
 {
+    /// <NEW>
+    public ActorBehaviour[] Behaviours { get; private set; }
+
+    [Tooltip("Name of the actor.")]
+    public string actorName;
+    /// </NEW>
+
+
+
     [TagSelector]
     public string[] blocks = new string[] { };
 
@@ -21,8 +30,23 @@ public abstract class Actor : MonoBehaviour
 
     private void Awake()
     {
-        initialPosition = transform.localPosition;
-        GameManager.Instance.RegisterActor(this);
+        /// <NEW>
+        var c = GetComponents<ActorBehaviour>();
+
+        /*for(int i = 0; i < components.Length; i++)
+        {
+            if (components[i].GetType().GetGenericTypeDefinition() == typeof(List<>))
+                Behaviours.Add(components[i]);
+        }*/
+
+        foreach (var b in c)
+        {
+            Debug.Log(b.BehaviourName);
+        }
+        /// </NEW>
+
+      //  initialPosition = transform.localPosition;
+       // GameManager.Instance.RegisterActor(this);
     }
 
     private void OnDestroy()
