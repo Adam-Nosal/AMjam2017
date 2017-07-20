@@ -2,13 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Actor : MonoBehaviour
+public class Actor : MonoBehaviour
 {
     /// <NEW>
+    public enum EActorType
+    {
+        Player,
+        Enemy
+    }
+
+    public enum EActorStatus
+    {
+        None,
+        Possessed
+    }
+    
     public ActorBehaviour[] Behaviours { get; private set; }
 
+    [SerializeField]
     [Tooltip("Name of the actor.")]
-    public string actorName;
+    private string actorName;
+    [SerializeField]
+    [Tooltip("Actor is enemy or can be possessed by player.")]
+    private EActorType actorType;
+    [SerializeField]
+    [Tooltip("State of the actor")]
+    private EActorStatus actorStatus;
+
+    public ActorBehaviour GetBehaviourByName(string behaviourName, bool inculdeHiddenForPlayer = false)
+    {
+        for(int i = 0; i < Behaviours.Length; i++)
+        {
+            if (Behaviours[i].BehaviourName == behaviourName && (inculdeHiddenForPlayer || !Behaviours[i].hiddenForPlayer))
+                return Behaviours[i];
+        }
+
+        return null;
+    }
+
     /// </NEW>
 
 
