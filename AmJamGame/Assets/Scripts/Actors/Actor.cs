@@ -14,7 +14,8 @@ public class Actor : MonoBehaviour
     public enum EActorStatus
     {
         None,
-        Possessed
+        Possessed,
+        Dead
     }
     
     public ActorBehaviour[] Behaviours { get; private set; }
@@ -38,6 +39,11 @@ public class Actor : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void SetActorStatus(EActorStatus status)
+    {
+        actorStatus = status;
     }
 
     /// </NEW>

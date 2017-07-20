@@ -24,7 +24,15 @@ public class DieBehaviour : ActorBehaviour
     public override void Execute(BehaviourExecutionInfo info)
     {
         var exeInfo = info as DieBehaviourExecutionInfo;
-        //TODO: get info about tile where actor stands.
+
+        if(exeInfo.ignoreHazards)
+        {
+            Owner.SetActorStatus(Actor.EActorStatus.Dead);
+        }
+        else
+        {
+            //TODO: get info about tile where actor stands.
+        }
     }
 
     public override EParseParametersStatus ParseParameters(ref BehaviourExecutionInfo executionInfo, params string[] parameters)
