@@ -21,5 +21,10 @@ public class MapObject
         }
         rooms[roomCode].Add(go);
     }
+
+    public GameObject GetGameobjectAtPosition(int x , int y)
+    {
+        return gos[x, y];
+    }
 }
 

@@ -9,18 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1150392925756458}
+  m_RootGameObject: {fileID: 1593508822625048}
   m_IsPrefabParent: 1
---- !u!1 &1150392925756458
+--- !u!1 &1593508822625048
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4319330963454248}
-  - component: {fileID: 212512032187214536}
-  - component: {fileID: 114768909693903038}
+  - component: {fileID: 4263473411655312}
+  - component: {fileID: 114125842117713552}
   m_Layer: 0
   m_Name: TILEMAP2_4
   m_TagString: Actor
@@ -28,37 +27,88 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4319330963454248
+--- !u!1 &1911383338039942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4848047381314724}
+  - component: {fileID: 212737218920477428}
+  m_Layer: 0
+  m_Name: tileset_1
+  m_TagString: Walls
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4263473411655312
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1150392925756458}
+  m_GameObject: {fileID: 1593508822625048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: -2, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4848047381314724}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4848047381314724
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911383338039942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4263473411655312}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114768909693903038
+--- !u!114 &114125842117713552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1150392925756458}
+  m_GameObject: {fileID: 1593508822625048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbb375b01ca5e94a91bb0f74eb53ca8, type: 3}
+  m_Script: {fileID: 11500000, guid: fbf3ba535361fc04ba2e7283a377bb20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileName: 
---- !u!212 &212512032187214536
+  actorName: 
+  actorType: 0
+  actorStatus: 0
+  blocks:
+  - Walls
+  - DoorClosed
+  - LevelFinish
+  - Shrubbery
+  hazards:
+  - Water
+  - Lava
+  interactables:
+  - LevelFinish
+  - Teleport
+  textsPossess:
+  - "A happy face. Keep in mind this presentation doesn\u2019t suit me."
+  - "Slap a smiling face on me and make me dance for you. Joke\u2019s on you, I have
+    no feet."
+  - 'You should have invested more in the art department. '
+  - "I\u2019m a human? Better watch out, those things are easy to break."
+  movementStep: 1
+  initialPosition: {x: 0, y: 0, z: 0}
+--- !u!212 &212737218920477428
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1150392925756458}
+  m_GameObject: {fileID: 1911383338039942}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -66,7 +116,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e822de73d3051d44caeba56412bf7cf1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +134,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300008, guid: e1cf46fd36dccd64ba071699ec202e80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,3 +143,4 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1

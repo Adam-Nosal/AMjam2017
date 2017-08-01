@@ -9,18 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1588614688412056}
+  m_RootGameObject: {fileID: 1338376665862762}
   m_IsPrefabParent: 1
---- !u!1 &1588614688412056
+--- !u!1 &1248648112192312
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4567399443206524}
-  - component: {fileID: 212498909190342234}
-  - component: {fileID: 114532744294050528}
+  - component: {fileID: 4077318044475576}
+  - component: {fileID: 212176227723804420}
+  m_Layer: 0
+  m_Name: tileset_1
+  m_TagString: Walls
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1338376665862762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4515768796815656}
+  - component: {fileID: 114141627070173112}
   m_Layer: 0
   m_Name: TILEMAP2_16
   m_TagString: Actor
@@ -28,37 +43,70 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4567399443206524
+--- !u!4 &4077318044475576
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588614688412056}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1248648112192312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 4515768796815656}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4515768796815656
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338376665862762}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: 7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4077318044475576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114532744294050528
+--- !u!114 &114141627070173112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588614688412056}
+  m_GameObject: {fileID: 1338376665862762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbb375b01ca5e94a91bb0f74eb53ca8, type: 3}
+  m_Script: {fileID: 11500000, guid: 086cad88b6d05fb49a2748b2d17e495a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileName: 
---- !u!212 &212498909190342234
+  actorName: 
+  actorType: 0
+  actorStatus: 0
+  blocks:
+  - Walls
+  - DoorClosed
+  - Clouds
+  - Grounds
+  hazards:
+  - Lava
+  interactables:
+  - Actor
+  - LevelFinish
+  textsPossess:
+  - The rarest pepe is me.
+  - "Hope we don\u2019t cross any streets. But walls are no problem."
+  - "Frogs like pigs, right? What they don\u2019t like is lava."
+  - '*stares intensely* all glory to the hypnotoad.'
+  movementStep: 2
+  initialPosition: {x: 0, y: 0, z: 0}
+--- !u!212 &212176227723804420
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588614688412056}
+  m_GameObject: {fileID: 1248648112192312}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -66,7 +114,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e822de73d3051d44caeba56412bf7cf1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +132,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300032, guid: e1cf46fd36dccd64ba071699ec202e80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,3 +141,4 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1

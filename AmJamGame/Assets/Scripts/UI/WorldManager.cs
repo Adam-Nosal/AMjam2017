@@ -12,6 +12,11 @@ public class WorldManager : Singleton<WorldManager>
     private AudioLibrary audioLibrary;
     private string audioLibraryPath = "mainAudioLibrary";
 
+    [SerializeField]
+    private TagHelper tagHelper;
+    private string tagHelperPath = "tagHelper";
+
+
     public SoundManager soundManager;
     public CameraControl cameraControl;
     public JumpCamera2D jumpCamera;
@@ -27,6 +32,7 @@ public class WorldManager : Singleton<WorldManager>
         InitLevelHolder();
         InitAudioLibrary();
         InitSoundManager();
+        InitTagHelper();
     }
 
     private void Start()
@@ -55,6 +61,14 @@ public class WorldManager : Singleton<WorldManager>
         if (audioLibrary == null)
         {
             audioLibrary = Resources.Load(audioLibraryPath) as AudioLibrary;
+        }
+    }
+
+    void InitTagHelper()
+    {
+        if (tagHelper == null)
+        {
+            tagHelper = Resources.Load(tagHelperPath) as TagHelper;
         }
     }
 
@@ -108,6 +122,11 @@ public class WorldManager : Singleton<WorldManager>
     {
         InitAudioLibrary();
         return audioLibrary;
+    }
+    public TagHelper GetTagHelper()
+    {
+        InitTagHelper();
+        return tagHelper;
     }
 
     public void ScreenShake()

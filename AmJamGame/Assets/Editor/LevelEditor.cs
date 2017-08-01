@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [CustomEditor(typeof(Level))]
 public class LevelEditor : Editor
 {
-    string levelToOpen = "untitled";
+    string levelToOpen = "";
 
     public override void OnInspectorGUI()
     {
@@ -13,7 +13,13 @@ public class LevelEditor : Editor
 
         Level level = (Level)target;
         levelToOpen = EditorGUILayout.TextField("Map Name", levelToOpen);
-        if(GUILayout.Button("Load From File"))
+
+        if (string.IsNullOrEmpty(level.levelToOpen))
+            level.levelToOpen = levelToOpen;
+        else
+            levelToOpen = level.levelToOpen;
+
+        if (GUILayout.Button("Load From File"))
         {
             level.LoadLevelByName(levelToOpen);
         }

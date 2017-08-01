@@ -44,8 +44,8 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator Start()
     {
-        GetPossessedActor().SetPossessed(true);
-        StartCoroutine(CustomUpdate());
+        //GetPossessedActor().SetPossessed(true);
+        //StartCoroutine(CustomUpdate());
       //  WorldManager.Instance.soundManager.PlayAmbient();
         yield return new WaitForSeconds(3f);
 
@@ -63,6 +63,14 @@ public class GameManager : Singleton<GameManager>
         l.Add(new MoveCommand(GetPossessedActor(), 0, directionType.right, 1));
 
         ExecuteCommands(l);*/
+    }
+
+    private void OnEnable()
+    {
+        GetPossessedActor().SetPossessed(true);
+        StartCoroutine(CustomUpdate());
+        
+
     }
 
     public void ExecuteCommands(List<ActorCommand> commands)
